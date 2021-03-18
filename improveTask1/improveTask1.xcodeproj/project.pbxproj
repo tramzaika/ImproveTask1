@@ -13,6 +13,7 @@
 		7C4B123F25FF8BEB009CABE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C4B123D25FF8BEB009CABE9 /* Main.storyboard */; };
 		7C4B124125FF8BF2009CABE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C4B124025FF8BF2009CABE9 /* Assets.xcassets */; };
 		7C4B124425FF8BF2009CABE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C4B124225FF8BF2009CABE9 /* LaunchScreen.storyboard */; };
+		7C4B124C26038FB3009CABE9 /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B124B26038FB3009CABE9 /* StyledTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		7C4B124025FF8BF2009CABE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C4B124325FF8BF2009CABE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C4B124525FF8BF2009CABE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C4B124B26038FB3009CABE9 /* StyledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				7C4B123725FF8BEB009CABE9 /* AppDelegate.swift */,
 				7C4B123925FF8BEB009CABE9 /* SceneDelegate.swift */,
 				7C4B123B25FF8BEB009CABE9 /* LoginViewController.swift */,
+				7C4B124B26038FB3009CABE9 /* StyledTextField.swift */,
 				7C4B123D25FF8BEB009CABE9 /* Main.storyboard */,
 				7C4B124025FF8BF2009CABE9 /* Assets.xcassets */,
 				7C4B124225FF8BF2009CABE9 /* LaunchScreen.storyboard */,
@@ -140,6 +143,7 @@
 			files = (
 				7C4B123C25FF8BEB009CABE9 /* LoginViewController.swift in Sources */,
 				7C4B123825FF8BEB009CABE9 /* AppDelegate.swift in Sources */,
+				7C4B124C26038FB3009CABE9 /* StyledTextField.swift in Sources */,
 				7C4B123A25FF8BEB009CABE9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
