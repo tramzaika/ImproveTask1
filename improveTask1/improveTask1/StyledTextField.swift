@@ -6,10 +6,12 @@
 //  Copyright © 2021 Lisa. All rights reserved.
 //
 
-import Foundation
+
 import UIKit
 
+@IBDesignable
 class StyledTextField: UITextField {
+    
     @IBInspectable var insetX: CGFloat = 0 {
         didSet {
             layoutIfNeeded()
