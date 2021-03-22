@@ -21,7 +21,7 @@ class StyledButton: UIButton{
     
     override open var isHighlighted: Bool {
         didSet {
-          backgroundColor = isHighlighted ? UIColor.black : UIColor.green
+          backgroundColor = isHighlighted ? UIColor.black : #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
         }
     }   
 }

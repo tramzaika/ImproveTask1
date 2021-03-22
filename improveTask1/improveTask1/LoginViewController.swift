@@ -18,7 +18,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var passwordTF: UITextField!
  
     @IBOutlet var enterBtn: StyledButton!
-    @IBOutlet var registrationBtn: UIButton!
+    @IBOutlet var registrationBtn: StyledButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
