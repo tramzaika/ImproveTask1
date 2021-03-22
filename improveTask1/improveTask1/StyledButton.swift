@@ -9,8 +9,8 @@
 
 import UIKit
 
-@IBDesignable
 class StyledButton: UIButton{
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -19,7 +19,7 @@ class StyledButton: UIButton{
         super.init(coder: coder)
     }
     
-    @IBInspectable override open var isHighlighted: Bool {
+    override open var isHighlighted: Bool {
         didSet {
           backgroundColor = isHighlighted ? UIColor.black : UIColor.green
         }

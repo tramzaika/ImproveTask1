@@ -85,9 +85,6 @@
                                 <state key="normal" title="Зарегистрироваться">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isHighlighted" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.49803696065989844" green="0.49803696065989844" blue="0.49803696065989844" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
@@ -115,6 +112,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="enterBtn" destination="gUn-ei-lLs" id="MNJ-hn-cHx"/>
                         <outlet property="loginTF" destination="pqR-mc-HGn" id="9dZ-2I-cjU"/>
                         <outlet property="passwordTF" destination="cvu-Uc-wEl" id="YS1-Qb-4hA"/>
                         <outlet property="registrationBtn" destination="MTx-bN-ECI" id="BHm-bK-aKR"/>

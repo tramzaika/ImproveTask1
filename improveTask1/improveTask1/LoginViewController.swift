@@ -10,17 +10,15 @@ import UIKit
 
 
 class LoginViewController: UIViewController {
-    
  
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var textLabel: UILabel!
     
     @IBOutlet var loginTF: UITextField!
     @IBOutlet var passwordTF: UITextField!
-    
-    @IBOutlet var enterBtn: UIButton!
+ 
+    @IBOutlet var enterBtn: StyledButton!
     @IBOutlet var registrationBtn: UIButton!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,16 +30,16 @@ class LoginViewController: UIViewController {
         passwordTF.delegate = self
         
         addTapGestureToHideKeyboard()
-
     }
-}
-extension LoginViewController: UITextFieldDelegate {
     
     func addTapGestureToHideKeyboard() {
             let tapGesture = UITapGestureRecognizer(target: view, action: #selector(view.endEditing))
             view.addGestureRecognizer(tapGesture)
     }
+}
 
+extension LoginViewController: UITextFieldDelegate {
+    
     func  textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
         if textField == loginTF {

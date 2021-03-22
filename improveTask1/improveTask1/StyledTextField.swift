@@ -12,7 +12,7 @@ import UIKit
 @IBDesignable
 class StyledTextField: UITextField {
     
-    @IBInspectable var insetX: CGFloat = 0 {
+    @IBInspectable var insetX: CGFloat = 0.0 {
         didSet {
             layoutIfNeeded()
         }
@@ -27,19 +27,12 @@ class StyledTextField: UITextField {
         super.init(frame: frame)
         self.setView()
     }
-//    init(backgroundColor: UIColor) {
-//        super.init(frame: .zero)
-//
-//        self.backgroundColor = backgroundColor
-//    }
     
     private func setView() {
-    
-       self.layer.cornerRadius = 10
+        self.layer.cornerRadius = 10
         self.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.56)
         self.layer.borderWidth = 2
         self.backgroundColor = #colorLiteral(red: 0.768627451, green: 0.768627451, blue: 0.768627451, alpha: 1)
-        
     }
     
     //placeholder position
@@ -51,6 +44,4 @@ class StyledTextField: UITextField {
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: insetX, dy: 0.0)
     }
-    
-    
 }
