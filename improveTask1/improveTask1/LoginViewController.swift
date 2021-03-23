@@ -30,8 +30,30 @@ class LoginViewController: UIViewController {
         passwordTF.delegate = self
         
         addTapGestureToHideKeyboard()
+        
+        
+        
+        //clojure
+//        ["1","4","12","6"].first { [weak self] (stringElement) -> Bool in
+//            guard let self = self else {return false}
+//            let bool = self.filter(string: stringElement)
+//            return bool
+//            //вернет опциональную стрингу
+//        }
+//
+//
+//        let mapped = ["1","4","12","6"].map({
+//            $0 + "_2"
+//
+//
+//        })
+//        print(mapped)
+//    }
+//
+//    func  filter (string: String) -> Bool {
+//        //return string
+//    }
     }
-    
     func addTapGestureToHideKeyboard() {
             let tapGesture = UITapGestureRecognizer(target: view, action: #selector(view.endEditing))
             view.addGestureRecognizer(tapGesture)
