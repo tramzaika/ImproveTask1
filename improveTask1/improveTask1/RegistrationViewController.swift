@@ -66,7 +66,10 @@ extension RegisrationViewController: UITextFieldDelegate, UIScrollViewDelegate {
     func  textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textFields = textFields.sorted{ $0.frame.origin.y < $1.frame.origin.y }
         
-        let indexTextField = textFields.firstIndex(of: textField)!
+        guard let indexTextField = textFields.firstIndex(of: textField) else {
+        return false
+        }
+        
         if indexTextField+1 < textFields.count {
             textFields[indexTextField+1].becomeFirstResponder()
         }
