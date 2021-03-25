@@ -256,12 +256,12 @@
                         <viewLayoutGuide key="safeArea" id="znK-Ym-4yB"/>
                     </view>
                     <connections>
-                        <outlet property="doneBtn" destination="fIk-g4-WoT" id="q39-T8-6M0"/>
-                        <outlet property="loginRegTF" destination="1nG-e6-lQO" id="hby-Pk-dC3"/>
-                        <outlet property="passwordRegTF" destination="eyn-AE-Bgf" id="YDc-Na-uZt"/>
-                        <outlet property="passwordRepeatRegTF" destination="iUQ-Fh-3SH" id="gQI-hc-qpX"/>
+                        <outlet property="doneButton" destination="fIk-g4-WoT" id="q39-T8-6M0"/>
                         <outlet property="registrationLabel" destination="0tu-JV-MgA" id="mPm-VT-9lN"/>
-                        <outlet property="scrollViewRegistrationVC" destination="qVA-IN-unN" id="YHC-je-T6p"/>
+                        <outlet property="scrollViewRegistrationViewController" destination="qVA-IN-unN" id="YHC-je-T6p"/>
+                        <outletCollection property="textFields" destination="1nG-e6-lQO" collectionClass="NSMutableArray" id="ZHF-W8-QJJ"/>
+                        <outletCollection property="textFields" destination="eyn-AE-Bgf" collectionClass="NSMutableArray" id="xYh-04-wUB"/>
+                        <outletCollection property="textFields" destination="iUQ-Fh-3SH" collectionClass="NSMutableArray" id="zMa-q3-s7Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eec-M8-RBF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

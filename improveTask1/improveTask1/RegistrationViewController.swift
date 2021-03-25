@@ -12,41 +12,35 @@ import  UIKit
 class RegisrationViewController: UIViewController {
         
     @IBOutlet var registrationLabel: UILabel!
-    
-    @IBOutlet var loginRegTF: StyledTextField!
-    @IBOutlet var passwordRegTF: StyledTextField!
-    @IBOutlet var passwordRepeatRegTF: StyledTextField!
-    
-    @IBOutlet var doneBtn: StyledButton!
-    
-    @IBOutlet var scrollViewRegistrationVC: UIScrollView!
+    @IBOutlet var textFields: [UITextField]!
+    @IBOutlet var doneButton: StyledButton!
+    @IBOutlet var scrollViewRegistrationViewController: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addTapGestureToHideKeyboard()
         
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardVillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        loginRegTF.returnKeyType = .continue
-        passwordRegTF.returnKeyType = .continue
-        passwordRepeatRegTF.returnKeyType = .done
+        textFields[0].returnKeyType = .continue
+        textFields[1].returnKeyType = .continue
+        textFields[2].returnKeyType = .done
         
-        loginRegTF.delegate = self
-        passwordRegTF.delegate = self
-        passwordRepeatRegTF.delegate = self
-        scrollViewRegistrationVC.delegate = self
+        for i in textFields {
+            i.delegate = self
+        }
+        scrollViewRegistrationViewController.delegate = self
     }
     
-    @objc func keyboardVillShow(sender: Notification) {
+    @objc func keyboardWillShow(sender: Notification) {
         if let keyboardSize = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            var insets = scrollViewRegistrationVC.contentInset
-            let height = scrollViewRegistrationVC.contentSize.height
+            var insets = scrollViewRegistrationViewController.contentInset
+            let height = scrollViewRegistrationViewController.contentSize.height
             insets.top = (height - keyboardSize.height)/2
             insets.bottom = (height + keyboardSize.height)/2
-            scrollViewRegistrationVC.contentInset = insets
+            scrollViewRegistrationViewController.contentInset = insets
         }
         if let animationTime = sender.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber {
             print(animationTime)
@@ -54,7 +48,7 @@ class RegisrationViewController: UIViewController {
     }
     
     @objc func keyboardWillHide() {
-        scrollViewRegistrationVC.contentInset = .zero
+        scrollViewRegistrationViewController.contentInset = .zero
     }
     
     func addTapGestureToHideKeyboard() {
@@ -70,23 +64,25 @@ class RegisrationViewController: UIViewController {
 extension RegisrationViewController: UITextFieldDelegate, UIScrollViewDelegate {
     
     func  textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == loginRegTF {
-            passwordRegTF.becomeFirstResponder()
+        textFields = textFields.sorted{ $0.frame.origin.y < $1.frame.origin.y }
+        
+        let indexTextField = textFields.firstIndex(of: textField)!
+        if indexTextField+1 < textFields.count {
+            textFields[indexTextField+1].becomeFirstResponder()
         }
-        if textField == passwordRegTF{
-        passwordRepeatRegTF.becomeFirstResponder()
-        }else {
-            passwordRepeatRegTF.resignFirstResponder()
+        
+        if textFields[indexTextField].returnKeyType == .done {
+            textFields[indexTextField].resignFirstResponder()
         }
-            return true
+        return true
     }
     
         func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
         if translation.y > 0 {
-           let scale = CGAffineTransform(scaleX: 1, y: 1)
-           registrationLabel.transform = scale
-           UIView.animate(withDuration: 1) {
+            let scale = CGAffineTransform(scaleX: 1, y: 1)
+            registrationLabel.transform = scale
+            UIView.animate(withDuration: 1) {
                 let scale = CGAffineTransform(scaleX: 1 + translation.y, y: 1 + translation.y)
                 self.registrationLabel.transform = scale
             }
