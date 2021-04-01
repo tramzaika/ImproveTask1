@@ -10,20 +10,7 @@ import UIKit
 
 class TableViewCell1: UITableViewCell {
     
-    @IBOutlet var iconImage: UIImageView!
-    
+    @IBOutlet var userPhoto: UIImageView!
+    @IBOutlet var iconImage: StyledImageView!
     @IBOutlet var loginLabel: UILabel!
-    
-    
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        // Initialization code
-//    }
-//
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
-    
 }

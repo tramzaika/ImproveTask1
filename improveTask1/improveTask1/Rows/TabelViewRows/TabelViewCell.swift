@@ -9,13 +9,7 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
-    
-   
+       
     @IBOutlet var colorProfileImage: UIImageView!
-    
     @IBOutlet var titleLabel: UILabel!
-    
-   
-    
-
 }
