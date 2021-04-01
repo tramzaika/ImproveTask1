@@ -14,10 +14,8 @@ class CollectoinViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         let nib = UINib(nibName: CollectionViewCell.nibName(), bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: CollectionViewCell.nibName())
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         }

@@ -8,8 +8,9 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class ProfileLoginTableViewCell: UITableViewCell {
        
+
     @IBOutlet var colorProfileImage: UIImageView!
     @IBOutlet var titleLabel: UILabel!
 }

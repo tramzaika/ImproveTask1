@@ -15,15 +15,16 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let nib = UINib(nibName: "TableViewCell", bundle: Bundle.main)
-        tableViewProfile.register(nib, forCellReuseIdentifier: "TableViewCell")
+        let ProfileLoginTableViewCellNib = UINib(nibName: "ProfileLoginTableViewCell", bundle: Bundle.main)
+        tableViewProfile.register(ProfileLoginTableViewCellNib, forCellReuseIdentifier: "ProfileLoginTableViewCell")
         
-        let nib1 = UINib(nibName: "TableViewCell1", bundle: Bundle.main)
-        tableViewProfile.register(nib1, forCellReuseIdentifier: "TableViewCell1" )
+        let ProfilePhotoTableViewCellNib = UINib(nibName: "ProfilePhotoTableViewCell", bundle: Bundle.main)
+        tableViewProfile.register(ProfilePhotoTableViewCellNib, forCellReuseIdentifier: "ProfilePhotoTableViewCell" )
         
-        let nib2 = UINib(nibName: "TableViewCell2", bundle: Bundle.main)
-        tableViewProfile.register(nib2, forCellReuseIdentifier: "TableViewCell2" )
+        let ProfilePlainTableViewCellNib = UINib(nibName: "ProfilePlainTableViewCell", bundle: Bundle.main)
+        tableViewProfile.register(ProfilePlainTableViewCellNib, forCellReuseIdentifier: "ProfilePlainTableViewCell" )
         
+          
         tableViewProfile.tableFooterView = UIView()
         tableViewProfile.dataSource = self
         tableViewProfile.delegate = self
@@ -52,7 +53,7 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0,
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell1",for:indexPath) as? TableViewCell1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfilePhotoTableViewCell",for:indexPath) as? ProfilePhotoTableViewCell {
             cell.iconImage.image = UIImage(named: "male avatar")
             cell.loginLabel.text = "Логин пользователя"
             cell.userPhoto.backgroundColor = #colorLiteral(red: 0.4941176471, green: 0.5333333333, blue: 0.9176470588, alpha: 0.51)
@@ -60,20 +61,20 @@ extension ProfileViewController: UITableViewDataSource {
         }
         
         if indexPath.row == 1,
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell2", for: indexPath) as? TableViewCell2{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfilePlainTableViewCell", for: indexPath) as? ProfilePlainTableViewCell {
             cell.dateRegistrationLabel.text = "Дата Регистрации"
             cell.dateLabel.text = "12.12.2020"
             return cell
         }
         
         if indexPath.row == 2,
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? TableViewCell{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileLoginTableViewCell", for: indexPath) as? ProfileLoginTableViewCell {
             cell.colorProfileImage.backgroundColor = #colorLiteral(red: 0.4941176471, green: 0.5333333333, blue: 0.9176470588, alpha: 0.51)
             cell.colorProfileImage.layer.cornerRadius = 7
             cell.titleLabel.text = "Цвет профиля"
             return cell
         }
-        return TableViewCell()
+        return ProfileLoginTableViewCell()
     }
 }
 

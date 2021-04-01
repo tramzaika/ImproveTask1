@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="147" id="C1z-ZX-fVb" customClass="TableViewCell" customModule="improveTask1" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="147" id="C1z-ZX-fVb" customClass="ProfileLoginTableViewCell" customModule="improveTask1" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="147"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C1z-ZX-fVb" id="ubB-9k-7fL">
@@ -39,7 +39,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="colorProfileImage" destination="ER6-V5-XTT" id="rO9-BT-89r"/>
+                <outlet property="colorProfileImage" destination="ER6-V5-XTT" id="aZF-Y8-CLO"/>
                 <outlet property="titleLabel" destination="uBi-P2-tCF" id="YwQ-0E-Yan"/>
             </connections>
             <point key="canvasLocation" x="163.768115942029" y="87.388392857142847"/>

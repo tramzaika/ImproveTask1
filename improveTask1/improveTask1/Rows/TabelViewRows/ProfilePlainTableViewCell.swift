@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewCell2: UITableViewCell {
+class ProfilePlainTableViewCell: UITableViewCell {
 
     @IBOutlet var dateRegistrationLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!

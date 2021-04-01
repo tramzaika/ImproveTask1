@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewCell1: UITableViewCell {
+class ProfilePhotoTableViewCell: UITableViewCell {
     
     @IBOutlet var userPhoto: UIImageView!
     @IBOutlet var iconImage: StyledImageView!
