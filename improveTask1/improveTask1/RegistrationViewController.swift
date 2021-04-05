@@ -29,7 +29,7 @@ class RegisrationViewController: UIViewController{
         let logInAnswer = AuthorizationMockSimulator().registerUser(login: login, password: password)
         if logInAnswer.result == true,
             let autorizationToken = logInAnswer.token {
-            keychain.set(autorizationToken, forKey: ImproveConstants.keychainTokenKey)
+            keychain.set(autorizationToken, forKey: UserAutorizationConstants.keychainTokenKey)
             let mainStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
                  let destinationViewController = mainStoryBoard.instantiateViewController(identifier: String(describing: UITabBarController.self))
                  navigationController?.pushViewController(destinationViewController, animated: true)

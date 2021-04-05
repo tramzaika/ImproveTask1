@@ -21,14 +21,14 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let ProfileLoginTableViewCellNib = UINib(nibName: "ProfileLoginTableViewCell", bundle: Bundle.main)
-        tableViewProfile.register(ProfileLoginTableViewCellNib, forCellReuseIdentifier: "ProfileLoginTableViewCell")
+        let ProfileLoginTableViewCellNib = UINib(nibName: ProfileLoginTableViewCell.nibName(), bundle: Bundle.main)
+        tableViewProfile.register(ProfileLoginTableViewCellNib, forCellReuseIdentifier: ProfileLoginTableViewCell.nibName())
         
-        let ProfilePhotoTableViewCellNib = UINib(nibName: "ProfilePhotoTableViewCell", bundle: Bundle.main)
-        tableViewProfile.register(ProfilePhotoTableViewCellNib, forCellReuseIdentifier: "ProfilePhotoTableViewCell" )
+        let ProfilePhotoTableViewCellNib = UINib(nibName: ProfilePhotoTableViewCell.nibName(), bundle: Bundle.main)
+        tableViewProfile.register(ProfilePhotoTableViewCellNib, forCellReuseIdentifier: ProfilePhotoTableViewCell.nibName() )
         
-        let ProfilePlainTableViewCellNib = UINib(nibName: "ProfilePlainTableViewCell", bundle: Bundle.main)
-        tableViewProfile.register(ProfilePlainTableViewCellNib, forCellReuseIdentifier: "ProfilePlainTableViewCell" )
+        let ProfilePlainTableViewCellNib = UINib(nibName: ProfilePlainTableViewCell.nibName(), bundle: Bundle.main)
+        tableViewProfile.register(ProfilePlainTableViewCellNib, forCellReuseIdentifier: ProfilePlainTableViewCell.nibName())
         
         tableViewProfile.tableFooterView = UIView()
         tableViewProfile.dataSource = self
@@ -83,7 +83,7 @@ extension ProfileViewController: UITableViewDataSource {
         if indexPath.row == 0,
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfilePhotoTableViewCell",for:indexPath) as? ProfilePhotoTableViewCell {
             cell.iconImage.image = imagePhoto
-            guard let autorizationToken = keychain.get(ImproveConstants.keychainTokenKey)
+            guard let autorizationToken = keychain.get(UserAutorizationConstants.keychainTokenKey)
                 else{return cell}
             
             if let photoAnswer = autorizeSimulator.postUserImage(token: autorizationToken, base64: imageToBase64(imagePhoto!)!) as? AuthorizationMockSimulator.CommonAnswer{

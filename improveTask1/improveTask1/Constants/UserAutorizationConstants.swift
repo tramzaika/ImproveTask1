@@ -6,6 +6,6 @@
 //  Copyright © 2021 Lisa. All rights reserved.
 //
 
-struct ImproveConstants {
+struct UserAutorizationConstants {
     static let keychainTokenKey = "KeychainTokenKey"
 }

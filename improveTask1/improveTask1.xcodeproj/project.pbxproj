@@ -26,8 +26,9 @@
 		7C4B124C26038FB3009CABE9 /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B124B26038FB3009CABE9 /* StyledTextField.swift */; };
 		7C4B124E260761C6009CABE9 /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B124D260761C6009CABE9 /* StyledButton.swift */; };
 		7CCE87312615FE4200E70EC1 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7CCE87302615FE4200E70EC1 /* KeychainSwift */; };
-		7CCE87342616024D00E70EC1 /* ImproveConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCE87332616024D00E70EC1 /* ImproveConstants.swift */; };
+		7CCE87342616024D00E70EC1 /* UserAutorizationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCE87332616024D00E70EC1 /* UserAutorizationConstants.swift */; };
 		7CCE873626171AA000E70EC1 /* AuthorizationServerSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCE873526171AA000E70EC1 /* AuthorizationServerSimulator.swift */; };
+		7CCE8738261AE19C00E70EC1 /* UITableViewCell + NibName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCE8737261AE19C00E70EC1 /* UITableViewCell + NibName.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,8 +52,9 @@
 		7C4B124525FF8BF2009CABE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C4B124B26038FB3009CABE9 /* StyledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledTextField.swift; sourceTree = "<group>"; };
 		7C4B124D260761C6009CABE9 /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
-		7CCE87332616024D00E70EC1 /* ImproveConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImproveConstants.swift; sourceTree = "<group>"; };
+		7CCE87332616024D00E70EC1 /* UserAutorizationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAutorizationConstants.swift; sourceTree = "<group>"; };
 		7CCE873526171AA000E70EC1 /* AuthorizationServerSimulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationServerSimulator.swift; sourceTree = "<group>"; };
+		7CCE8737261AE19C00E70EC1 /* UITableViewCell + NibName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell + NibName.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 		7C44E52426120D3000B20CF8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7CCE8737261AE19C00E70EC1 /* UITableViewCell + NibName.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -146,7 +149,7 @@
 		7CCE87322616021900E70EC1 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				7CCE87332616024D00E70EC1 /* ImproveConstants.swift */,
+				7CCE87332616024D00E70EC1 /* UserAutorizationConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -241,8 +244,9 @@
 				7C44E510260CB6BD00B20CF8 /* ProfileViewController.swift in Sources */,
 				7C4B124E260761C6009CABE9 /* StyledButton.swift in Sources */,
 				7C4B124C26038FB3009CABE9 /* StyledTextField.swift in Sources */,
-				7CCE87342616024D00E70EC1 /* ImproveConstants.swift in Sources */,
+				7CCE87342616024D00E70EC1 /* UserAutorizationConstants.swift in Sources */,
 				7CCE873626171AA000E70EC1 /* AuthorizationServerSimulator.swift in Sources */,
+				7CCE8738261AE19C00E70EC1 /* UITableViewCell + NibName.swift in Sources */,
 				7C4B123A25FF8BEB009CABE9 /* SceneDelegate.swift in Sources */,
 				7C4711AF2614D0300014602A /* StyledImageView.swift in Sources */,
 			);

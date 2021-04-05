@@ -146,7 +146,7 @@
         <!--Regisration View Controller-->
         <scene sceneID="RQQ-Hf-lrq">
             <objects>
-                <viewController storyboardIdentifier="UIRegistrationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Iwe-CX-DVa" customClass="RegisrationViewController" customModule="improveTask1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisrationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Iwe-CX-DVa" customClass="RegisrationViewController" customModule="improveTask1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e6Y-UR-vZr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

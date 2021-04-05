@@ -32,12 +32,13 @@ class LoginViewController: UIViewController {
         let loginAnswer = AuthorizationMockSimulator().logIn(login: login, password: password)
         if loginAnswer.result == true,
             let autorizationToken = loginAnswer.token {
-            keychain.set(autorizationToken, forKey: ImproveConstants.keychainTokenKey)
-        }
+            keychain.set(autorizationToken, forKey: UserAutorizationConstants.keychainTokenKey)
+        
         
         let mainStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let destinationViewController = mainStoryBoard.instantiateViewController(identifier: String(describing: UITabBarController.self))
         navigationController?.pushViewController(destinationViewController, animated: true)
+        }
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -45,7 +46,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func registrationAction(_ sender: Any) {
         let mainStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let destinationViewController = mainStoryBoard.instantiateViewController(identifier: "UIRegistrationViewController")
+        let destinationViewController = mainStoryBoard.instantiateViewController(identifier:String(describing: RegisrationViewController().theClassName) )
         navigationController?.pushViewController(destinationViewController, animated: true)
     }
     
@@ -77,5 +78,10 @@ extension LoginViewController: UITextFieldDelegate {
             passwordTextField.resignFirstResponder()
         }
         return true
+    }
+}
+extension NSObject {
+    var theClassName: String {
+        return String(describing: type(of: self))
     }
 }
