@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0cu-sB-6Ac">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -72,7 +72,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="o6S-V5-J2d" kind="presentation" identifier="showProfile" modalPresentationStyle="fullScreen" id="L7K-Ph-nnJ"/>
+                                    <action selector="loginAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7qa-YI-xLC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MTx-bN-ECI" customClass="StyledButton" customModule="improveTask1" customModuleProvider="target">
@@ -86,7 +86,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Iwe-CX-DVa" kind="presentation" identifier="showRegistration" modalPresentationStyle="fullScreen" id="CBK-6S-uat"/>
+                                    <action selector="registrationAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="09O-BS-EDK"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -114,23 +114,39 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="XOc-Zf-2wc"/>
                     <connections>
-                        <outlet property="enterBtn" destination="gUn-ei-lLs" id="MNJ-hn-cHx"/>
-                        <outlet property="loginTF" destination="pqR-mc-HGn" id="9dZ-2I-cjU"/>
-                        <outlet property="passwordTF" destination="cvu-Uc-wEl" id="YS1-Qb-4hA"/>
-                        <outlet property="registrationBtn" destination="MTx-bN-ECI" id="BHm-bK-aKR"/>
+                        <outlet property="loginButton" destination="gUn-ei-lLs" id="MNJ-hn-cHx"/>
+                        <outlet property="loginTextField" destination="pqR-mc-HGn" id="9dZ-2I-cjU"/>
+                        <outlet property="passwordTextField" destination="cvu-Uc-wEl" id="YS1-Qb-4hA"/>
+                        <outlet property="registrationButton" destination="MTx-bN-ECI" id="BHm-bK-aKR"/>
                         <outlet property="textLabel" destination="drq-7j-rEq" id="ll7-W1-0cH"/>
                         <outlet property="titleLabel" destination="AHc-BT-JHh" id="3Bh-qt-BK1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="991" y="-1175"/>
+            <point key="canvasLocation" x="732" y="-1122"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SqC-FC-XZ3">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="0cu-sB-6Ac" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bgj-A3-St7">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="io2-ko-uAb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="98E-ed-9IK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-134" y="-1122"/>
         </scene>
         <!--Regisration View Controller-->
         <scene sceneID="RQQ-Hf-lrq">
             <objects>
-                <viewController id="Iwe-CX-DVa" customClass="RegisrationViewController" customModule="improveTask1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UIRegistrationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Iwe-CX-DVa" customClass="RegisrationViewController" customModule="improveTask1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e6Y-UR-vZr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -218,7 +234,7 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
-                                                            <segue destination="o6S-V5-J2d" kind="presentation" modalPresentationStyle="fullScreen" id="yDb-TV-8YM"/>
+                                                            <action selector="registrationAction:" destination="Iwe-CX-DVa" eventType="touchUpInside" id="HqI-Tx-xfl"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -276,7 +292,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eec-M8-RBF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2042" y="-1669"/>
+            <point key="canvasLocation" x="1671" y="-1796"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="wkH-Pb-Sdk">
@@ -322,7 +338,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jcC-8G-cbE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3978" y="241"/>
+            <point key="canvasLocation" x="3924" y="313"/>
         </scene>
         <!--meu-->
         <scene sceneID="Cum-Zo-9VN">
@@ -339,13 +355,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hxl-tf-XTI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2958" y="217"/>
+            <point key="canvasLocation" x="2318" y="313"/>
         </scene>
         <!--Profile-->
         <scene sceneID="LM2-Hi-yIx">
             <objects>
                 <navigationController navigationBarHidden="YES" id="67M-37-7W5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="contact" id="9Hn-zf-Gtc"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="contactIcon" id="9Hn-zf-Gtc"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="clQ-9w-72Q">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -377,7 +393,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="iln-WG-FL6">
             <objects>
-                <tabBarController id="o6S-V5-J2d" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="UITabBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="o6S-V5-J2d" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="XqH-Uh-tTH"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8am-o1-npp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -393,15 +409,12 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ge1-tc-oyA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3095" y="-1155"/>
+            <point key="canvasLocation" x="3175" y="-1417"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="yDb-TV-8YM"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowtriangle.right.fill" catalog="system" width="128" height="113"/>
-        <image name="contact" width="64" height="64"/>
+        <image name="contactIcon" width="60" height="42"/>
         <image name="male avatar" width="4000" height="4000"/>
     </resources>
 </document>

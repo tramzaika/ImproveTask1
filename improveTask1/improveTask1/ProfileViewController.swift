@@ -8,10 +8,16 @@
 
 
 import UIKit
+import KeychainSwift
+
 
 class ProfileViewController: UIViewController {
     
     @IBOutlet var tableViewProfile: UITableView!
+    
+    let keychain = KeychainSwift()
+    let autorizeSimulator = AuthorizationMockSimulator()
+    var imagePhoto =  UIImage(named: "male avatar")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +30,6 @@ class ProfileViewController: UIViewController {
         let ProfilePlainTableViewCellNib = UINib(nibName: "ProfilePlainTableViewCell", bundle: Bundle.main)
         tableViewProfile.register(ProfilePlainTableViewCellNib, forCellReuseIdentifier: "ProfilePlainTableViewCell" )
         
-          
         tableViewProfile.tableFooterView = UIView()
         tableViewProfile.dataSource = self
         tableViewProfile.delegate = self
@@ -39,11 +44,35 @@ extension ProfileViewController: UITableViewDelegate {
             return  48.0
         }
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            let actionSheet = UIAlertController( title: nil,
+                                                 message: nil,
+                                                 preferredStyle: .actionSheet)
+            let camera = UIAlertAction(title: "Camera", style: .default){ _ in
+                self.chooseImagePicker(source: .camera)
+            }
+            camera.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+            let photo = UIAlertAction(title: "Photo", style: .default){ _ in
+                self.chooseImagePicker(source: .photoLibrary)
+            }
+            photo.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+            
+            actionSheet.addAction(camera)
+            actionSheet.addAction(photo)
+            actionSheet.addAction(cancel)
+            present(actionSheet,animated: true)
+        }
+        else {
+            view.endEditing(true)
+        }
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        3
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -51,22 +80,35 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if indexPath.row == 0,
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfilePhotoTableViewCell",for:indexPath) as? ProfilePhotoTableViewCell {
-            cell.iconImage.image = UIImage(named: "male avatar")
-            cell.loginLabel.text = "Логин пользователя"
+            cell.iconImage.image = imagePhoto
+            guard let autorizationToken = keychain.get(ImproveConstants.keychainTokenKey)
+                else{return cell}
+            
+            if let photoAnswer = autorizeSimulator.postUserImage(token: autorizationToken, base64: imageToBase64(imagePhoto!)!) as? AuthorizationMockSimulator.CommonAnswer{
+                print(photoAnswer.result)
+            }
+            
+            if let user = AuthorizationMockSimulator().getProfile(token: autorizationToken){
+                let login = user.user?.login
+                cell.loginLabel.text = login
+                if let photo = user.user?.photo{
+                    cell.iconImage.image = base64ToImage(photo)
+                }
+            }else{
+                cell.loginLabel.text = "Логин пользователя"
+            }
             cell.userPhoto.backgroundColor = #colorLiteral(red: 0.4941176471, green: 0.5333333333, blue: 0.9176470588, alpha: 0.51)
+            cell.userPhoto.image = imagePhoto
             return cell
         }
-        
         if indexPath.row == 1,
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfilePlainTableViewCell", for: indexPath) as? ProfilePlainTableViewCell {
             cell.dateRegistrationLabel.text = "Дата Регистрации"
             cell.dateLabel.text = "12.12.2020"
             return cell
         }
-        
         if indexPath.row == 2,
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileLoginTableViewCell", for: indexPath) as? ProfileLoginTableViewCell {
             cell.colorProfileImage.backgroundColor = #colorLiteral(red: 0.4941176471, green: 0.5333333333, blue: 0.9176470588, alpha: 0.51)
@@ -76,6 +118,32 @@ extension ProfileViewController: UITableViewDataSource {
         }
         return ProfileLoginTableViewCell()
     }
+    
+    func imageToBase64(_ image: UIImage) -> String? {
+        return image.jpegData(compressionQuality: 1)?.base64EncodedString()
+    }
+    
+    func base64ToImage(_ base64String: String) -> UIImage? {
+        guard let imageData = Data(base64Encoded: base64String) else { return nil }
+        return UIImage(data: imageData)
+    }
 }
 
-
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    func chooseImagePicker(source: UIImagePickerController.SourceType){
+        if UIImagePickerController.isSourceTypeAvailable(source){
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = source
+            present(imagePicker, animated: true)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        imagePhoto = (info[.editedImage] as? UIImage)!
+        tableViewProfile.reloadData()
+        dismiss(animated: true)
+    }
+}
