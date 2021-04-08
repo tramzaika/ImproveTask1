@@ -17,7 +17,9 @@ class ProfileViewController: UIViewController {
     
     let keychain = KeychainSwift()
     let autorizeSimulator = AuthorizationMockSimulator()
-    var imagePhoto =  UIImage(named: "male avatar")
+    var login = String()
+    var userPhoto = UIImage(named: "male avatar")
+    var autorizationToken = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,16 @@ class ProfileViewController: UIViewController {
         tableViewProfile.tableFooterView = UIView()
         tableViewProfile.dataSource = self
         tableViewProfile.delegate = self
+        
+        if let token = keychain.get(UserAutorizationConstants.keychainTokenKey) {
+            autorizationToken = token} else {return}
+        
+        if let user = AuthorizationMockSimulator().getProfile(token: autorizationToken){
+            login = user.user?.login ?? "Логин пользователя"
+            if let photo = user.user?.photo{
+                userPhoto = base64ToImage(photo) ?? UIImage(named: "male avatar")!
+            }
+        }
     }
 }
 
@@ -81,36 +93,21 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0,
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfilePhotoTableViewCell",for:indexPath) as? ProfilePhotoTableViewCell {
-            cell.iconImage.image = imagePhoto
-            guard let autorizationToken = keychain.get(UserAutorizationConstants.keychainTokenKey)
-                else{return cell}
-            
-            if let photoAnswer = autorizeSimulator.postUserImage(token: autorizationToken, base64: imageToBase64(imagePhoto!)!) as? AuthorizationMockSimulator.CommonAnswer{
-                print(photoAnswer.result)
-            }
-            
-            if let user = AuthorizationMockSimulator().getProfile(token: autorizationToken){
-                let login = user.user?.login
-                cell.loginLabel.text = login
-                if let photo = user.user?.photo{
-                    cell.iconImage.image = base64ToImage(photo)
-                }
-            }else{
-                cell.loginLabel.text = "Логин пользователя"
-            }
+           let cell = tableView.dequeueReusableCell(withIdentifier: ProfilePhotoTableViewCell.nibName(),for:indexPath) as? ProfilePhotoTableViewCell {
+            cell.iconImage.image = userPhoto
             cell.userPhoto.backgroundColor = #colorLiteral(red: 0.4941176471, green: 0.5333333333, blue: 0.9176470588, alpha: 0.51)
-            cell.userPhoto.image = imagePhoto
+            cell.userPhoto.image = userPhoto
+            cell.loginLabel.text = login
             return cell
         }
         if indexPath.row == 1,
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfilePlainTableViewCell", for: indexPath) as? ProfilePlainTableViewCell {
+           let cell = tableView.dequeueReusableCell(withIdentifier: ProfilePlainTableViewCell.nibName(), for: indexPath) as? ProfilePlainTableViewCell {
             cell.dateRegistrationLabel.text = "Дата Регистрации"
             cell.dateLabel.text = "12.12.2020"
             return cell
         }
         if indexPath.row == 2,
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileLoginTableViewCell", for: indexPath) as? ProfileLoginTableViewCell {
+           let cell = tableView.dequeueReusableCell(withIdentifier: ProfileLoginTableViewCell.nibName(), for: indexPath) as? ProfileLoginTableViewCell {
             cell.colorProfileImage.backgroundColor = #colorLiteral(red: 0.4941176471, green: 0.5333333333, blue: 0.9176470588, alpha: 0.51)
             cell.colorProfileImage.layer.cornerRadius = 7
             cell.titleLabel.text = "Цвет профиля"
@@ -142,8 +139,10 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        imagePhoto = (info[.editedImage] as? UIImage)!
+        userPhoto = (info[.editedImage] as? UIImage)!
         tableViewProfile.reloadData()
+        if let photoAnswer = autorizeSimulator.postUserImage(token: autorizationToken, base64: imageToBase64(userPhoto!)!) as? AuthorizationMockSimulator.CommonAnswer{
+        }
         dismiss(animated: true)
     }
 }

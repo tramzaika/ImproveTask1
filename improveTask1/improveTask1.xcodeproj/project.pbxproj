@@ -25,6 +25,13 @@
 		7C4B124425FF8BF2009CABE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C4B124225FF8BF2009CABE9 /* LaunchScreen.storyboard */; };
 		7C4B124C26038FB3009CABE9 /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B124B26038FB3009CABE9 /* StyledTextField.swift */; };
 		7C4B124E260761C6009CABE9 /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B124D260761C6009CABE9 /* StyledButton.swift */; };
+		7C54C00C261B3BB300D999AF /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 7C54C00B261B3BB300D999AF /* MBProgressHUD */; };
+		7C54C00E261B3C5000D999AF /* PlanetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54C00D261B3C5000D999AF /* PlanetListViewController.swift */; };
+		7C54C011261B3E7300D999AF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7C54C010261B3E7300D999AF /* Alamofire */; };
+		7C54C015261B414E00D999AF /* PlanetListResponceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54C014261B414E00D999AF /* PlanetListResponceModel.swift */; };
+		7C54C017261B44C600D999AF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54C016261B44C600D999AF /* NetworkService.swift */; };
+		7C79AB76261D4FB100BF7B95 /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 7C79AB75261D4FB100BF7B95 /* PKHUD */; };
+		7C79AB79261D79BE00BF7B95 /* PlanetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C79AB78261D79BE00BF7B95 /* PlanetTableViewCell.swift */; };
 		7CCE87312615FE4200E70EC1 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7CCE87302615FE4200E70EC1 /* KeychainSwift */; };
 		7CCE87342616024D00E70EC1 /* UserAutorizationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCE87332616024D00E70EC1 /* UserAutorizationConstants.swift */; };
 		7CCE873626171AA000E70EC1 /* AuthorizationServerSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCE873526171AA000E70EC1 /* AuthorizationServerSimulator.swift */; };
@@ -52,6 +59,10 @@
 		7C4B124525FF8BF2009CABE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C4B124B26038FB3009CABE9 /* StyledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledTextField.swift; sourceTree = "<group>"; };
 		7C4B124D260761C6009CABE9 /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
+		7C54C00D261B3C5000D999AF /* PlanetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetListViewController.swift; sourceTree = "<group>"; };
+		7C54C014261B414E00D999AF /* PlanetListResponceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetListResponceModel.swift; sourceTree = "<group>"; };
+		7C54C016261B44C600D999AF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		7C79AB78261D79BE00BF7B95 /* PlanetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetTableViewCell.swift; sourceTree = "<group>"; };
 		7CCE87332616024D00E70EC1 /* UserAutorizationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAutorizationConstants.swift; sourceTree = "<group>"; };
 		7CCE873526171AA000E70EC1 /* AuthorizationServerSimulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationServerSimulator.swift; sourceTree = "<group>"; };
 		7CCE8737261AE19C00E70EC1 /* UITableViewCell + NibName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell + NibName.swift"; sourceTree = "<group>"; };
@@ -62,6 +73,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C54C011261B3E7300D999AF /* Alamofire in Frameworks */,
+				7C79AB76261D4FB100BF7B95 /* PKHUD in Frameworks */,
+				7C54C00C261B3BB300D999AF /* MBProgressHUD in Frameworks */,
 				7CCE87312615FE4200E70EC1 /* KeychainSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				7CCE873526171AA000E70EC1 /* AuthorizationServerSimulator.swift */,
+				7C54C016261B44C600D999AF /* NetworkService.swift */,
 			);
 			path = Servises;
 			sourceTree = "<group>";
@@ -125,17 +140,20 @@
 		7C4B123625FF8BEB009CABE9 /* improveTask1 */ = {
 			isa = PBXGroup;
 			children = (
+				7C54C012261B403600D999AF /* Models */,
 				7CCE87322616021900E70EC1 /* Constants */,
 				7C4711B42615F6440014602A /* Servises */,
 				7C44E52426120D3000B20CF8 /* Extensions */,
+				7C4B124D260761C6009CABE9 /* StyledButton.swift */,
+				7C4711AE2614D0300014602A /* StyledImageView.swift */,
+				7C4B124B26038FB3009CABE9 /* StyledTextField.swift */,
 				7C4B123725FF8BEB009CABE9 /* AppDelegate.swift */,
 				7C4B123925FF8BEB009CABE9 /* SceneDelegate.swift */,
 				7C4711B02615DFE20014602A /* CollectoinViewController.swift */,
 				7C4B123B25FF8BEB009CABE9 /* LoginViewController.swift */,
-				7C4B124B26038FB3009CABE9 /* StyledTextField.swift */,
-				7C4B124D260761C6009CABE9 /* StyledButton.swift */,
-				7C4711AE2614D0300014602A /* StyledImageView.swift */,
 				7C4B123D25FF8BEB009CABE9 /* Main.storyboard */,
+				7C79AB78261D79BE00BF7B95 /* PlanetTableViewCell.swift */,
+				7C54C00D261B3C5000D999AF /* PlanetListViewController.swift */,
 				7C44E50F260CB6BD00B20CF8 /* ProfileViewController.swift */,
 				7C44E50D2608C95500B20CF8 /* RegistrationViewController.swift */,
 				7C44E511260CB95E00B20CF8 /* Rows */,
@@ -144,6 +162,22 @@
 				7C4B124525FF8BF2009CABE9 /* Info.plist */,
 			);
 			path = improveTask1;
+			sourceTree = "<group>";
+		};
+		7C54C012261B403600D999AF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7C54C013261B407100D999AF /* DTO */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7C54C013261B407100D999AF /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				7C54C014261B414E00D999AF /* PlanetListResponceModel.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		7CCE87322616021900E70EC1 /* Constants */ = {
@@ -172,6 +206,9 @@
 			name = improveTask1;
 			packageProductDependencies = (
 				7CCE87302615FE4200E70EC1 /* KeychainSwift */,
+				7C54C00B261B3BB300D999AF /* MBProgressHUD */,
+				7C54C010261B3E7300D999AF /* Alamofire */,
+				7C79AB75261D4FB100BF7B95 /* PKHUD */,
 			);
 			productName = improveTask1;
 			productReference = 7C4B123425FF8BEB009CABE9 /* improveTask1.app */;
@@ -203,6 +240,9 @@
 			mainGroup = 7C4B122B25FF8BEB009CABE9;
 			packageReferences = (
 				7CCE872F2615FE4200E70EC1 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				7C54C00A261B3BB300D999AF /* XCRemoteSwiftPackageReference "MBProgressHUD" */,
+				7C54C00F261B3E7300D999AF /* XCRemoteSwiftPackageReference "Alamofire" */,
+				7C79AB74261D4FB100BF7B95 /* XCRemoteSwiftPackageReference "PKHUD" */,
 			);
 			productRefGroup = 7C4B123525FF8BEB009CABE9 /* Products */;
 			projectDirPath = "";
@@ -242,11 +282,15 @@
 				7C44E50E2608C95500B20CF8 /* RegistrationViewController.swift in Sources */,
 				7C4B123825FF8BEB009CABE9 /* AppDelegate.swift in Sources */,
 				7C44E510260CB6BD00B20CF8 /* ProfileViewController.swift in Sources */,
+				7C54C00E261B3C5000D999AF /* PlanetListViewController.swift in Sources */,
 				7C4B124E260761C6009CABE9 /* StyledButton.swift in Sources */,
 				7C4B124C26038FB3009CABE9 /* StyledTextField.swift in Sources */,
 				7CCE87342616024D00E70EC1 /* UserAutorizationConstants.swift in Sources */,
+				7C54C017261B44C600D999AF /* NetworkService.swift in Sources */,
+				7C54C015261B414E00D999AF /* PlanetListResponceModel.swift in Sources */,
 				7CCE873626171AA000E70EC1 /* AuthorizationServerSimulator.swift in Sources */,
 				7CCE8738261AE19C00E70EC1 /* UITableViewCell + NibName.swift in Sources */,
+				7C79AB79261D79BE00BF7B95 /* PlanetTableViewCell.swift in Sources */,
 				7C4B123A25FF8BEB009CABE9 /* SceneDelegate.swift in Sources */,
 				7C4711AF2614D0300014602A /* StyledImageView.swift in Sources */,
 			);
@@ -448,6 +492,30 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7C54C00A261B3BB300D999AF /* XCRemoteSwiftPackageReference "MBProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jdg/MBProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+		7C54C00F261B3E7300D999AF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.2;
+			};
+		};
+		7C79AB74261D4FB100BF7B95 /* XCRemoteSwiftPackageReference "PKHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pkluz/PKHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.0;
+			};
+		};
 		7CCE872F2615FE4200E70EC1 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
@@ -459,6 +527,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7C54C00B261B3BB300D999AF /* MBProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C54C00A261B3BB300D999AF /* XCRemoteSwiftPackageReference "MBProgressHUD" */;
+			productName = MBProgressHUD;
+		};
+		7C54C010261B3E7300D999AF /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C54C00F261B3E7300D999AF /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		7C79AB75261D4FB100BF7B95 /* PKHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C79AB74261D4FB100BF7B95 /* XCRemoteSwiftPackageReference "PKHUD" */;
+			productName = PKHUD;
+		};
 		7CCE87302615FE4200E70EC1 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7CCE872F2615FE4200E70EC1 /* XCRemoteSwiftPackageReference "keychain-swift" */;

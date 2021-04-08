@@ -9,3 +9,9 @@
 struct UserAutorizationConstants {
     static let keychainTokenKey = "KeychainTokenKey"
 }
+
+struct NetworkContstants {
+    struct URLString {
+        static let planetList = "https://rickandmortyapi.com/api/location"
+    }
+}
