@@ -24,20 +24,20 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginAction(_ sender: Any) {
         guard let login = loginTextField.text,
-            let password = passwordTextField.text
-            else {
-                return
+              let password = passwordTextField.text
+        else {
+            return
         }
         
         let loginAnswer = AuthorizationMockSimulator().logIn(login: login, password: password)
         if loginAnswer.result == true,
-            let autorizationToken = loginAnswer.token {
+           let autorizationToken = loginAnswer.token {
             keychain.set(autorizationToken, forKey: UserAutorizationConstants.keychainTokenKey)
-        
-        
-        let mainStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let destinationViewController = mainStoryBoard.instantiateViewController(identifier: String(describing: UITabBarController.self))
-        navigationController?.pushViewController(destinationViewController, animated: true)
+            
+            
+            let mainStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let destinationViewController = mainStoryBoard.instantiateViewController(identifier: String(describing: UITabBarController.self))
+            navigationController?.pushViewController(destinationViewController, animated: true)
         }
     }
     deinit {
@@ -80,8 +80,4 @@ extension LoginViewController: UITextFieldDelegate {
         return true
     }
 }
-extension NSObject {
-    var theClassName: String {
-        return String(describing: type(of: self))
-    }
-}
+

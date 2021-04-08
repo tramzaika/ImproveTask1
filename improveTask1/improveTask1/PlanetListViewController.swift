@@ -13,9 +13,10 @@ import PKHUD
 
 class PlanetListViewController: UIViewController {
     let networkService: PlanetsListNetworkService = NetworkService()
-    var planets:[PlanetListResultResponceModel]=[]
+    var planets:[PlanetListResultResponseModel]=[]
     var isLoaded = 0
     var page = 1
+    var listOfPlanets = [Planet]()
     
     @IBOutlet var planetTableView: UITableView!
     
@@ -28,8 +29,17 @@ class PlanetListViewController: UIViewController {
         HUD.registerForKeyboardNotifications()
         HUD.allowsInteraction = false
         HUD.dimsBackground = true
+        loadPlanets()
+        
+        print (listOfPlanets)
         DispatchQueue.global().async {
-            self.loadPlanets()
+        }
+    }
+    
+    func createModelPlanets(){
+        for planet in planets {
+            let planets = Planet(name: planet.name ?? "Безымянное", countOfPeople: String (planet.residents.count), type: planet.type ?? "Нечто")
+            listOfPlanets.append(planets)
         }
     }
     
@@ -37,10 +47,12 @@ class PlanetListViewController: UIViewController {
         HUD.show(.progress)
         networkService.getPlanetList(page: page) { [weak self] (response, error) in
             guard let self = self else {return}
-            self.planets = response!.results
+            guard let response = response else {return}
+            self.planets = response.results
             HUD.hide()
             self.planetTableView.reloadData()
             self.isLoaded = 1
+            self.createModelPlanets()
         }
     }}
 
@@ -52,13 +64,13 @@ extension PlanetListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as? PlanetTableViewCell else
         {
-            fatalError("Not found cell")
+            return UITableViewCell()
         }
         
         if isLoaded == 1{
-            cell.locationLabel.text = planets[indexPath.row].name
-            cell.typeOfLocationLabel.text = planets[indexPath.row].type
-            cell.CountOfPeopleLabel.text = String(planets[indexPath.row].residents.count)
+            cell.locationLabel.text = listOfPlanets[indexPath.row].name
+            cell.typeOfLocationLabel.text = listOfPlanets[indexPath.row].type
+            cell.countOfPeopleLabel.text = listOfPlanets[indexPath.row].countOfPeople
         }
         return cell
     }

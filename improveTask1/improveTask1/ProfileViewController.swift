@@ -19,6 +19,7 @@ class ProfileViewController: UIViewController {
     let autorizeSimulator = AuthorizationMockSimulator()
     var login = String()
     var userPhoto = UIImage(named: "male avatar")
+    //  var userPhoto = UIImage(named: "male avatar") ?? UIImage()
     var autorizationToken = String()
     
     override func viewDidLoad() {
@@ -39,10 +40,12 @@ class ProfileViewController: UIViewController {
         if let token = keychain.get(UserAutorizationConstants.keychainTokenKey) {
             autorizationToken = token} else {return}
         
+        guard let user = AuthorizationMockSimulator().getProfile(token: autorizationToken) else { return }
+        
         if let user = AuthorizationMockSimulator().getProfile(token: autorizationToken){
             login = user.user?.login ?? "Логин пользователя"
             if let photo = user.user?.photo{
-                userPhoto = base64ToImage(photo) ?? UIImage(named: "male avatar")!
+                userPhoto = base64ToImage(photo) ?? UIImage(named: "male avatar")
             }
         }
     }
@@ -139,9 +142,11 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        userPhoto = (info[.editedImage] as? UIImage)!
+        userPhoto = info[.editedImage] as? UIImage
+        guard  let userPhoto = userPhoto else {return}
         tableViewProfile.reloadData()
-        if let photoAnswer = autorizeSimulator.postUserImage(token: autorizationToken, base64: imageToBase64(userPhoto!)!) as? AuthorizationMockSimulator.CommonAnswer{
+        guard let photo = imageToBase64(userPhoto) else {return}
+        if let photoAnswer = autorizeSimulator.postUserImage(token: autorizationToken, base64: photo) as? AuthorizationMockSimulator.CommonAnswer{
         }
         dismiss(animated: true)
     }

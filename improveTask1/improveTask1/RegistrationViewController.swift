@@ -20,22 +20,23 @@ class RegisrationViewController: UIViewController{
     
     @IBAction func registrationAction(_ sender: Any) {
         guard let login = textFields[0].text,
-            let password = textFields[1].text,
-            let passwordRepeat = textFields[2].text
-            else {
-                return
+              let password = textFields[1].text,
+              let passwordRepeat = textFields[2].text,
+              password == passwordRepeat
+        else {
+            return
         }
-        if password == passwordRepeat{
+        
         let logInAnswer = AuthorizationMockSimulator().registerUser(login: login, password: password)
         if logInAnswer.result == true,
-            let autorizationToken = logInAnswer.token {
+           let autorizationToken = logInAnswer.token {
             keychain.set(autorizationToken, forKey: UserAutorizationConstants.keychainTokenKey)
             let mainStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                 let destinationViewController = mainStoryBoard.instantiateViewController(identifier: String(describing: UITabBarController.self))
-                 navigationController?.pushViewController(destinationViewController, animated: true)
-        }
+            let destinationViewController = mainStoryBoard.instantiateViewController(identifier: String(describing: UITabBarController.self))
+            navigationController?.pushViewController(destinationViewController, animated: true)
         } else {}
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addTapGestureToHideKeyboard()

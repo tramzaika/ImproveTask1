@@ -12,13 +12,5 @@ class PlanetTableViewCell: UITableViewCell {
 
     @IBOutlet var locationLabel: UILabel!
     @IBOutlet var typeOfLocationLabel: UILabel!
-    
-    @IBOutlet var CountOfPeopleLabel: UILabel!
-    
-    @IBAction func detailAction(_ sender: Any) {
-    }
-    
-    
-    
-    
+    @IBOutlet var countOfPeopleLabel: UILabel!
 }

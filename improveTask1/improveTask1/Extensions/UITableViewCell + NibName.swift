@@ -11,6 +11,13 @@ import UIKit
 extension UITableViewCell {
     
     static func nibName() -> String {
-           String(describing: Self.self)
-       }
+        String(describing: Self.self)
+    }
 }
+
+extension NSObject {
+    var theClassName: String {
+        String(describing: type(of: self))
+    }
+}
+

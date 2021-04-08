@@ -10,11 +10,11 @@ import Foundation
 import Alamofire
 
 protocol PlanetsListNetworkService{
-    func getPlanetList(page: Int,onRequestCompleted:@escaping ((PlanetListResponceModel?, Error?)->()))
+    func getPlanetList(page: Int,onRequestCompleted:@escaping ((PlanetListResponseModel?, Error?)->()))
 }
 
 class NetworkService: PlanetsListNetworkService{
-    func getPlanetList(page: Int,onRequestCompleted:@escaping ((PlanetListResponceModel?, Error?)->())) {
+    func getPlanetList(page: Int,onRequestCompleted:@escaping ((PlanetListResponseModel?, Error?)->())) {
         
         performRequest(urlString: NetworkContstants.URLString.planetList + "?page=\(page)", onRequestCompleted: onRequestCompleted)
     }

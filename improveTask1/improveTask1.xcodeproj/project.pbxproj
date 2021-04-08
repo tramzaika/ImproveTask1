@@ -28,7 +28,7 @@
 		7C54C00C261B3BB300D999AF /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 7C54C00B261B3BB300D999AF /* MBProgressHUD */; };
 		7C54C00E261B3C5000D999AF /* PlanetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54C00D261B3C5000D999AF /* PlanetListViewController.swift */; };
 		7C54C011261B3E7300D999AF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7C54C010261B3E7300D999AF /* Alamofire */; };
-		7C54C015261B414E00D999AF /* PlanetListResponceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54C014261B414E00D999AF /* PlanetListResponceModel.swift */; };
+		7C54C015261B414E00D999AF /* PlanetListResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54C014261B414E00D999AF /* PlanetListResponseModel.swift */; };
 		7C54C017261B44C600D999AF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54C016261B44C600D999AF /* NetworkService.swift */; };
 		7C79AB76261D4FB100BF7B95 /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 7C79AB75261D4FB100BF7B95 /* PKHUD */; };
 		7C79AB79261D79BE00BF7B95 /* PlanetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C79AB78261D79BE00BF7B95 /* PlanetTableViewCell.swift */; };
@@ -36,6 +36,7 @@
 		7CCE87342616024D00E70EC1 /* UserAutorizationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCE87332616024D00E70EC1 /* UserAutorizationConstants.swift */; };
 		7CCE873626171AA000E70EC1 /* AuthorizationServerSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCE873526171AA000E70EC1 /* AuthorizationServerSimulator.swift */; };
 		7CCE8738261AE19C00E70EC1 /* UITableViewCell + NibName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCE8737261AE19C00E70EC1 /* UITableViewCell + NibName.swift */; };
+		7CFD1E6C261EF96A00AC9642 /* PlanetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD1E6B261EF96A00AC9642 /* PlanetModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,12 +61,13 @@
 		7C4B124B26038FB3009CABE9 /* StyledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledTextField.swift; sourceTree = "<group>"; };
 		7C4B124D260761C6009CABE9 /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
 		7C54C00D261B3C5000D999AF /* PlanetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetListViewController.swift; sourceTree = "<group>"; };
-		7C54C014261B414E00D999AF /* PlanetListResponceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetListResponceModel.swift; sourceTree = "<group>"; };
+		7C54C014261B414E00D999AF /* PlanetListResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetListResponseModel.swift; sourceTree = "<group>"; };
 		7C54C016261B44C600D999AF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		7C79AB78261D79BE00BF7B95 /* PlanetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetTableViewCell.swift; sourceTree = "<group>"; };
 		7CCE87332616024D00E70EC1 /* UserAutorizationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAutorizationConstants.swift; sourceTree = "<group>"; };
 		7CCE873526171AA000E70EC1 /* AuthorizationServerSimulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationServerSimulator.swift; sourceTree = "<group>"; };
 		7CCE8737261AE19C00E70EC1 /* UITableViewCell + NibName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell + NibName.swift"; sourceTree = "<group>"; };
+		7CFD1E6B261EF96A00AC9642 /* PlanetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				7C54C013261B407100D999AF /* DTO */,
+				7CFD1E6B261EF96A00AC9642 /* PlanetModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -175,7 +178,7 @@
 		7C54C013261B407100D999AF /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				7C54C014261B414E00D999AF /* PlanetListResponceModel.swift */,
+				7C54C014261B414E00D999AF /* PlanetListResponseModel.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -283,11 +286,12 @@
 				7C4B123825FF8BEB009CABE9 /* AppDelegate.swift in Sources */,
 				7C44E510260CB6BD00B20CF8 /* ProfileViewController.swift in Sources */,
 				7C54C00E261B3C5000D999AF /* PlanetListViewController.swift in Sources */,
+				7CFD1E6C261EF96A00AC9642 /* PlanetModel.swift in Sources */,
 				7C4B124E260761C6009CABE9 /* StyledButton.swift in Sources */,
 				7C4B124C26038FB3009CABE9 /* StyledTextField.swift in Sources */,
 				7CCE87342616024D00E70EC1 /* UserAutorizationConstants.swift in Sources */,
 				7C54C017261B44C600D999AF /* NetworkService.swift in Sources */,
-				7C54C015261B414E00D999AF /* PlanetListResponceModel.swift in Sources */,
+				7C54C015261B414E00D999AF /* PlanetListResponseModel.swift in Sources */,
 				7CCE873626171AA000E70EC1 /* AuthorizationServerSimulator.swift in Sources */,
 				7CCE8738261AE19C00E70EC1 /* UITableViewCell + NibName.swift in Sources */,
 				7C79AB79261D79BE00BF7B95 /* PlanetTableViewCell.swift in Sources */,

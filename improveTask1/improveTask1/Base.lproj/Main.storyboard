@@ -376,18 +376,8 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cud-Ih-YWy">
-                                            <rect key="frame" x="343" y="0.0" width="32" height="106"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="32" id="NJ3-Kd-T09"/>
-                                            </constraints>
-                                            <state key="normal" title="Button" image="chevron.right" catalog="system"/>
-                                            <connections>
-                                                <action selector="detailAction:" destination="Bcs-RA-MXu" eventType="touchUpInside" id="1Bf-Pb-Y5F"/>
-                                            </connections>
-                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CountOfPeople" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QqF-as-Xyt">
-                                            <rect key="frame" x="203.66666666666663" y="11" width="131.33333333333337" height="84"/>
+                                            <rect key="frame" x="203.66666666666666" y="11" width="123.33333333333334" height="84"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -396,19 +386,16 @@
                                     <constraints>
                                         <constraint firstItem="0xy-Pz-hKa" firstAttribute="top" secondItem="F4l-xH-bbu" secondAttribute="top" id="8oU-Wi-My7"/>
                                         <constraint firstItem="0xy-Pz-hKa" firstAttribute="width" secondItem="F4l-xH-bbu" secondAttribute="width" multiplier="1:2" id="Cxd-ys-Fmf"/>
-                                        <constraint firstAttribute="bottom" secondItem="cud-Ih-YWy" secondAttribute="bottom" id="IyJ-7f-XeF"/>
-                                        <constraint firstItem="cud-Ih-YWy" firstAttribute="leading" secondItem="QqF-as-Xyt" secondAttribute="trailing" constant="8" id="UVy-lQ-aFd"/>
                                         <constraint firstItem="0xy-Pz-hKa" firstAttribute="leading" secondItem="F4l-xH-bbu" secondAttribute="leading" constant="16" id="Usk-s9-ldv"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="QqF-as-Xyt" secondAttribute="bottom" id="XTT-N2-hw3"/>
                                         <constraint firstItem="QqF-as-Xyt" firstAttribute="leading" secondItem="0xy-Pz-hKa" secondAttribute="trailing" id="ZKx-el-UnP"/>
-                                        <constraint firstAttribute="trailing" secondItem="cud-Ih-YWy" secondAttribute="trailing" id="f0V-lZ-Jgm"/>
                                         <constraint firstAttribute="bottom" secondItem="0xy-Pz-hKa" secondAttribute="bottom" id="fZ4-ed-zNs"/>
                                         <constraint firstItem="QqF-as-Xyt" firstAttribute="top" secondItem="F4l-xH-bbu" secondAttribute="topMargin" id="roB-nY-cnH"/>
-                                        <constraint firstItem="cud-Ih-YWy" firstAttribute="top" secondItem="F4l-xH-bbu" secondAttribute="top" id="uho-6O-lU6"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="QqF-as-Xyt" secondAttribute="trailing" constant="32" id="z5m-Er-dGK"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="CountOfPeopleLabel" destination="QqF-as-Xyt" id="RJs-b2-jHa"/>
+                                    <outlet property="countOfPeopleLabel" destination="QqF-as-Xyt" id="RJs-b2-jHa"/>
                                     <outlet property="locationLabel" destination="dDQ-zf-G2x" id="AgS-kZ-Q3D"/>
                                     <outlet property="typeOfLocationLabel" destination="0S0-WY-n07" id="a4t-95-qmJ"/>
                                 </connections>
@@ -498,7 +485,6 @@
         </designable>
     </designables>
     <resources>
-        <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="contactIcon" width="60" height="42"/>
         <image name="male avatar" width="4000" height="4000"/>
         <image name="planetIcon" width="30" height="30"/>
