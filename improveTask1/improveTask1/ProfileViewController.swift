@@ -19,7 +19,7 @@ class ProfileViewController: UIViewController {
     let autorizeSimulator = AuthorizationMockSimulator()
     var login = String()
     var userPhoto = UIImage(named: "male avatar")
-    //  var userPhoto = UIImage(named: "male avatar") ?? UIImage()
+    let placeholderUserPhoto = UIImage(named: "male avatar")
     var autorizationToken = String()
     
     override func viewDidLoad() {
@@ -45,7 +45,7 @@ class ProfileViewController: UIViewController {
         if let user = AuthorizationMockSimulator().getProfile(token: autorizationToken){
             login = user.user?.login ?? "Логин пользователя"
             if let photo = user.user?.photo{
-                userPhoto = base64ToImage(photo) ?? UIImage(named: "male avatar")
+                userPhoto = base64ToImage(photo) ?? placeholderUserPhoto
             }
         }
     }
@@ -97,9 +97,11 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0,
            let cell = tableView.dequeueReusableCell(withIdentifier: ProfilePhotoTableViewCell.nibName(),for:indexPath) as? ProfilePhotoTableViewCell {
+            
             cell.iconImage.image = userPhoto
             cell.userPhoto.backgroundColor = #colorLiteral(red: 0.4941176471, green: 0.5333333333, blue: 0.9176470588, alpha: 0.51)
-            cell.userPhoto.image = userPhoto
+            if userPhoto != UIImage(named: "male avatar"){
+                cell.userPhoto.image = userPhoto}
             cell.loginLabel.text = login
             return cell
         }

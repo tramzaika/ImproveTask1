@@ -14,6 +14,7 @@ import PKHUD
 class PlanetListViewController: UIViewController {
     let networkService: PlanetsListNetworkService = NetworkService()
     var planets:[PlanetListResultResponseModel]=[]
+    var infoPages = 0
     var isLoaded = 0
     var page = 1
     var listOfPlanets = [Planet]()
@@ -29,17 +30,24 @@ class PlanetListViewController: UIViewController {
         HUD.registerForKeyboardNotifications()
         HUD.allowsInteraction = false
         HUD.dimsBackground = true
-        loadPlanets()
         
-        print (listOfPlanets)
         DispatchQueue.global().async {
         }
     }
-    
+    func changePage() {
+        if page < infoPages {
+            page = page+1
+            loadPlanets()
+            // planetTableView.reloadData()
+            print(page)
+            print()
+        }
+    }
     func createModelPlanets(){
         for planet in planets {
-            let planets = Planet(name: planet.name ?? "Безымянное", countOfPeople: String (planet.residents.count), type: planet.type ?? "Нечто")
-            listOfPlanets.append(planets)
+            let currentPlanet = Planet(name: planet.name ?? "Безымянное", countOfPeople: String (planet.residents.count), type: planet.type ?? "Нечто")
+            listOfPlanets.append(currentPlanet)
+            planetTableView.reloadData()
         }
     }
     
@@ -50,7 +58,8 @@ class PlanetListViewController: UIViewController {
             guard let response = response else {return}
             self.planets = response.results
             HUD.hide()
-            self.planetTableView.reloadData()
+            self.infoPages = response.info.pages
+            self.page = self.page+1
             self.isLoaded = 1
             self.createModelPlanets()
         }
@@ -58,15 +67,16 @@ class PlanetListViewController: UIViewController {
 
 extension PlanetListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        planets.count
+        listOfPlanets.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as? PlanetTableViewCell else
         {
             return UITableViewCell()
         }
-        
+        cell.accessoryType = .disclosureIndicator
         if isLoaded == 1{
             cell.locationLabel.text = listOfPlanets[indexPath.row].name
             cell.typeOfLocationLabel.text = listOfPlanets[indexPath.row].type
@@ -77,6 +87,23 @@ extension PlanetListViewController: UITableViewDataSource {
 }
 
 extension PlanetListViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == listOfPlanets.count/2 {
+            DispatchQueue.global(qos: .utility).async {
+                self.networkService.getPlanetList(page: self.page) { [weak self] (response, error) in
+                    guard let self = self,
+                          let response = response else {return}
+                    self.planets = response.results
+                }
+            }
+            DispatchQueue.main.async {
+                if self.page >= self.infoPages {return} else {
+                    self.page = self.page+1
+                    self.createModelPlanets()
+                }
+            }
+        }
+    }
 }
+
 

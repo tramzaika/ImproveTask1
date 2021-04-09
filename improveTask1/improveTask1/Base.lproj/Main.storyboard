@@ -224,7 +224,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                 </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aEy-2O-KMB">
                                                 <rect key="frame" x="0.0" y="645" width="375" height="51"/>
@@ -383,6 +383,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="tintColor" systemColor="linkColor"/>
                                     <constraints>
                                         <constraint firstItem="0xy-Pz-hKa" firstAttribute="top" secondItem="F4l-xH-bbu" secondAttribute="top" id="8oU-Wi-My7"/>
                                         <constraint firstItem="0xy-Pz-hKa" firstAttribute="width" secondItem="F4l-xH-bbu" secondAttribute="width" multiplier="1:2" id="Cxd-ys-Fmf"/>
@@ -469,25 +470,28 @@
     </scenes>
     <designables>
         <designable name="1nG-e6-lQO">
-            <size key="intrinsicContentSize" width="208.33333333333334" height="30.333333333333332"/>
+            <size key="intrinsicContentSize" width="160.33333333333334" height="30.333333333333332"/>
         </designable>
         <designable name="cvu-Uc-wEl">
-            <size key="intrinsicContentSize" width="148" height="30.333333333333332"/>
+            <size key="intrinsicContentSize" width="100" height="30.333333333333332"/>
         </designable>
         <designable name="eyn-AE-Bgf">
-            <size key="intrinsicContentSize" width="221.66666666666666" height="30.333333333333332"/>
+            <size key="intrinsicContentSize" width="173.66666666666666" height="30.333333333333332"/>
         </designable>
         <designable name="iUQ-Fh-3SH">
-            <size key="intrinsicContentSize" width="247.66666666666666" height="30.333333333333332"/>
+            <size key="intrinsicContentSize" width="199.66666666666666" height="30.333333333333332"/>
         </designable>
         <designable name="pqR-mc-HGn">
-            <size key="intrinsicContentSize" width="105.33333333333333" height="30.333333333333332"/>
+            <size key="intrinsicContentSize" width="57.333333333333336" height="30.333333333333332"/>
         </designable>
     </designables>
     <resources>
         <image name="contactIcon" width="60" height="42"/>
         <image name="male avatar" width="4000" height="4000"/>
         <image name="planetIcon" width="30" height="30"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
