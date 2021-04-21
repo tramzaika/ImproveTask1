@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C3C0D1A262466CC00836C98 /* CitizenDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3C0D19262466CC00836C98 /* CitizenDetailViewController.swift */; };
+		7C3C0D1E26247E7D00836C98 /* CitizenResponceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3C0D1D26247E7D00836C98 /* CitizenResponceModel.swift */; };
+		7C3C0D212624840D00836C98 /* CitizenCreateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3C0D202624840D00836C98 /* CitizenCreateService.swift */; };
+		7C3C0D3826272A8900836C98 /* CitizenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3C0D3626272A8900836C98 /* CitizenCollectionViewCell.swift */; };
+		7C3C0D3926272A8900836C98 /* CitizenCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3C0D3726272A8900836C98 /* CitizenCollectionViewCell.xib */; };
 		7C44E50E2608C95500B20CF8 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C44E50D2608C95500B20CF8 /* RegistrationViewController.swift */; };
 		7C44E510260CB6BD00B20CF8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C44E50F260CB6BD00B20CF8 /* ProfileViewController.swift */; };
 		7C44E513260CB9B800B20CF8 /* ProfileLoginTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C44E512260CB9B800B20CF8 /* ProfileLoginTableViewCell.xib */; };
@@ -40,6 +45,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C3C0D19262466CC00836C98 /* CitizenDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenDetailViewController.swift; sourceTree = "<group>"; };
+		7C3C0D1D26247E7D00836C98 /* CitizenResponceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenResponceModel.swift; sourceTree = "<group>"; };
+		7C3C0D202624840D00836C98 /* CitizenCreateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenCreateService.swift; sourceTree = "<group>"; };
+		7C3C0D3626272A8900836C98 /* CitizenCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitizenCollectionViewCell.swift; sourceTree = "<group>"; };
+		7C3C0D3726272A8900836C98 /* CitizenCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CitizenCollectionViewCell.xib; sourceTree = "<group>"; };
 		7C44E50D2608C95500B20CF8 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		7C44E50F260CB6BD00B20CF8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7C44E512260CB9B800B20CF8 /* ProfileLoginTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileLoginTableViewCell.xib; sourceTree = "<group>"; };
@@ -85,9 +95,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C3C0D3526272A7200836C98 /* CollectionViewRows */ = {
+			isa = PBXGroup;
+			children = (
+				7C3C0D3626272A8900836C98 /* CitizenCollectionViewCell.swift */,
+				7C3C0D3726272A8900836C98 /* CitizenCollectionViewCell.xib */,
+			);
+			path = CollectionViewRows;
+			sourceTree = "<group>";
+		};
 		7C44E511260CB95E00B20CF8 /* Rows */ = {
 			isa = PBXGroup;
 			children = (
+				7C3C0D3526272A7200836C98 /* CollectionViewRows */,
 				7C44E51C261205FB00B20CF8 /* TabelViewRows */,
 			);
 			path = Rows;
@@ -109,6 +129,9 @@
 		7C44E52426120D3000B20CF8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7C4B124D260761C6009CABE9 /* StyledButton.swift */,
+				7C4B124B26038FB3009CABE9 /* StyledTextField.swift */,
+				7C4711AE2614D0300014602A /* StyledImageView.swift */,
 				7CCE8737261AE19C00E70EC1 /* UITableViewCell + NibName.swift */,
 			);
 			path = Extensions;
@@ -119,6 +142,7 @@
 			children = (
 				7CCE873526171AA000E70EC1 /* AuthorizationServerSimulator.swift */,
 				7C54C016261B44C600D999AF /* NetworkService.swift */,
+				7C3C0D202624840D00836C98 /* CitizenCreateService.swift */,
 			);
 			path = Servises;
 			sourceTree = "<group>";
@@ -146,18 +170,16 @@
 				7CCE87322616021900E70EC1 /* Constants */,
 				7C4711B42615F6440014602A /* Servises */,
 				7C44E52426120D3000B20CF8 /* Extensions */,
-				7C4B124D260761C6009CABE9 /* StyledButton.swift */,
-				7C4711AE2614D0300014602A /* StyledImageView.swift */,
-				7C4B124B26038FB3009CABE9 /* StyledTextField.swift */,
 				7C4B123725FF8BEB009CABE9 /* AppDelegate.swift */,
 				7C4B123925FF8BEB009CABE9 /* SceneDelegate.swift */,
-				7C4711B02615DFE20014602A /* CollectoinViewController.swift */,
-				7C4B123B25FF8BEB009CABE9 /* LoginViewController.swift */,
 				7C4B123D25FF8BEB009CABE9 /* Main.storyboard */,
-				7C79AB78261D79BE00BF7B95 /* PlanetTableViewCell.swift */,
+				7C4B123B25FF8BEB009CABE9 /* LoginViewController.swift */,
+				7C4711B02615DFE20014602A /* CollectoinViewController.swift */,
+				7C3C0D19262466CC00836C98 /* CitizenDetailViewController.swift */,
 				7C54C00D261B3C5000D999AF /* PlanetListViewController.swift */,
 				7C44E50F260CB6BD00B20CF8 /* ProfileViewController.swift */,
 				7C44E50D2608C95500B20CF8 /* RegistrationViewController.swift */,
+				7C79AB78261D79BE00BF7B95 /* PlanetTableViewCell.swift */,
 				7C44E511260CB95E00B20CF8 /* Rows */,
 				7C4B124025FF8BF2009CABE9 /* Assets.xcassets */,
 				7C4B124225FF8BF2009CABE9 /* LaunchScreen.storyboard */,
@@ -179,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				7C54C014261B414E00D999AF /* PlanetListResponseModel.swift */,
+				7C3C0D1D26247E7D00836C98 /* CitizenResponceModel.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -264,6 +287,7 @@
 				7C44E51B260CCA0B00B20CF8 /* ProfilePlainTableViewCell.xib in Resources */,
 				7C4B124425FF8BF2009CABE9 /* LaunchScreen.storyboard in Resources */,
 				7C44E513260CB9B800B20CF8 /* ProfileLoginTableViewCell.xib in Resources */,
+				7C3C0D3926272A8900836C98 /* CitizenCollectionViewCell.xib in Resources */,
 				7C4B124125FF8BF2009CABE9 /* Assets.xcassets in Resources */,
 				7C4B123F25FF8BEB009CABE9 /* Main.storyboard in Resources */,
 				7C44E53226130B4F00B20CF8 /* ProfilePhotoTableViewCell.xib in Resources */,
@@ -281,6 +305,7 @@
 				7C44E51A260CCA0B00B20CF8 /* ProfilePlainTableViewCell.swift in Sources */,
 				7C4B123C25FF8BEB009CABE9 /* LoginViewController.swift in Sources */,
 				7C44E515260CBB0C00B20CF8 /* ProfileLoginTableViewCell.swift in Sources */,
+				7C3C0D1A262466CC00836C98 /* CitizenDetailViewController.swift in Sources */,
 				7C4711B12615DFE20014602A /* CollectoinViewController.swift in Sources */,
 				7C44E50E2608C95500B20CF8 /* RegistrationViewController.swift in Sources */,
 				7C4B123825FF8BEB009CABE9 /* AppDelegate.swift in Sources */,
@@ -291,12 +316,15 @@
 				7C4B124C26038FB3009CABE9 /* StyledTextField.swift in Sources */,
 				7CCE87342616024D00E70EC1 /* UserAutorizationConstants.swift in Sources */,
 				7C54C017261B44C600D999AF /* NetworkService.swift in Sources */,
+				7C3C0D3826272A8900836C98 /* CitizenCollectionViewCell.swift in Sources */,
 				7C54C015261B414E00D999AF /* PlanetListResponseModel.swift in Sources */,
 				7CCE873626171AA000E70EC1 /* AuthorizationServerSimulator.swift in Sources */,
 				7CCE8738261AE19C00E70EC1 /* UITableViewCell + NibName.swift in Sources */,
+				7C3C0D212624840D00836C98 /* CitizenCreateService.swift in Sources */,
 				7C79AB79261D79BE00BF7B95 /* PlanetTableViewCell.swift in Sources */,
 				7C4B123A25FF8BEB009CABE9 /* SceneDelegate.swift in Sources */,
 				7C4711AF2614D0300014602A /* StyledImageView.swift in Sources */,
+				7C3C0D1E26247E7D00836C98 /* CitizenResponceModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

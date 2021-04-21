@@ -11,13 +11,17 @@ import UIKit
 import PKHUD
 
 
+
+
 class PlanetListViewController: UIViewController {
+    
     let networkService: PlanetsListNetworkService = NetworkService()
     var planets:[PlanetListResultResponseModel]=[]
     var infoPages = 0
-    var isLoaded = 0
+    var isLoaded = false
     var page = 1
     var listOfPlanets = [Planet]()
+    let ol = CitizenCreateService()
     
     @IBOutlet var planetTableView: UITableView!
     
@@ -31,21 +35,17 @@ class PlanetListViewController: UIViewController {
         HUD.allowsInteraction = false
         HUD.dimsBackground = true
         
-        DispatchQueue.global().async {
-        }
+     
     }
     func changePage() {
         if page < infoPages {
             page = page+1
             loadPlanets()
-            // planetTableView.reloadData()
-            print(page)
-            print()
         }
     }
     func createModelPlanets(){
         for planet in planets {
-            let currentPlanet = Planet(name: planet.name ?? "Безымянное", countOfPeople: String (planet.residents.count), type: planet.type ?? "Нечто")
+            let currentPlanet = Planet(name: planet.name ?? "Безымянное", countOfPeople: String (planet.residents.count), type: planet.type ?? "Нечто", residentsUrl: planet.residents)
             listOfPlanets.append(currentPlanet)
             planetTableView.reloadData()
         }
@@ -54,13 +54,13 @@ class PlanetListViewController: UIViewController {
     func loadPlanets(){
         HUD.show(.progress)
         networkService.getPlanetList(page: page) { [weak self] (response, error) in
-            guard let self = self else {return}
-            guard let response = response else {return}
+            guard let self = self,
+                  let response = response else {return}
             self.planets = response.results
             HUD.hide()
             self.infoPages = response.info.pages
             self.page = self.page+1
-            self.isLoaded = 1
+            self.isLoaded = true
             self.createModelPlanets()
         }
     }}
@@ -76,8 +76,9 @@ extension PlanetListViewController: UITableViewDataSource {
         {
             return UITableViewCell()
         }
+        cell.selectionStyle = .none
         cell.accessoryType = .disclosureIndicator
-        if isLoaded == 1{
+        if isLoaded == true{
             cell.locationLabel.text = listOfPlanets[indexPath.row].name
             cell.typeOfLocationLabel.text = listOfPlanets[indexPath.row].type
             cell.countOfPeopleLabel.text = listOfPlanets[indexPath.row].countOfPeople
@@ -87,6 +88,19 @@ extension PlanetListViewController: UITableViewDataSource {
 }
 
 extension PlanetListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       global.urlArray = listOfPlanets[indexPath.row].residentsUrl
+     
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let destinationViewController = mainStoryBoard.instantiateViewController(identifier:String(describing: CitizenDetailViewController().theClassName))
+        if let citizenUrls = destinationViewController as? CitizenDetailViewController{
+            citizenUrls.urlStringlist = listOfPlanets[indexPath.row].residentsUrl
+            citizenUrls.planetTitle = listOfPlanets[indexPath.row].name
+        }
+        navigationController?.pushViewController(destinationViewController, animated: true)
+    }
+    
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == listOfPlanets.count/2 {
             DispatchQueue.global(qos: .utility).async {

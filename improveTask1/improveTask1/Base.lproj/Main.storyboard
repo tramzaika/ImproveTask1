@@ -343,6 +343,38 @@
             </objects>
             <point key="canvasLocation" x="3924" y="313"/>
         </scene>
+        <!--Citizen Detail View Controller-->
+        <scene sceneID="z7r-70-S1j">
+            <objects>
+                <viewController storyboardIdentifier="CitizenDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nTh-GV-J2Y" customClass="CitizenDetailViewController" customModule="improveTask1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="b6e-ac-Ttt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bBG-H4-Eoe">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewLayout key="collectionViewLayout" id="P0n-tZ-erZ"/>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="K1r-aL-o9V"/>
+                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bBG-H4-Eoe" firstAttribute="leading" secondItem="K1r-aL-o9V" secondAttribute="leading" id="9Aa-t0-d21"/>
+                            <constraint firstItem="K1r-aL-o9V" firstAttribute="trailing" secondItem="bBG-H4-Eoe" secondAttribute="trailing" id="G3U-D5-iP4"/>
+                            <constraint firstItem="K1r-aL-o9V" firstAttribute="bottom" secondItem="bBG-H4-Eoe" secondAttribute="bottom" id="UaL-bH-z4h"/>
+                            <constraint firstItem="bBG-H4-Eoe" firstAttribute="top" secondItem="b6e-ac-Ttt" secondAttribute="top" id="oMB-qf-tWE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="bBG-H4-Eoe" id="cJg-zD-NTZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eze-iu-0mp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="666" y="-50"/>
+        </scene>
         <!--Выбор планеты-->
         <scene sceneID="Cum-Zo-9VN">
             <objects>
@@ -404,7 +436,9 @@
                         </prototypes>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Выбор планеты" id="cOh-EK-YF5"/>
-                    <navigationItem key="navigationItem" title="Выбор планеты" id="7lr-ni-fqs"/>
+                    <navigationItem key="navigationItem" title="Выбор планеты" id="7lr-ni-fqs">
+                        <barButtonItem key="backBarButtonItem" title=" " id="MlB-ur-wjP"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="planetTableView" destination="16p-5F-vu7" id="Lmk-P6-QjY"/>
                     </connections>
@@ -470,19 +504,19 @@
     </scenes>
     <designables>
         <designable name="1nG-e6-lQO">
-            <size key="intrinsicContentSize" width="160.33333333333334" height="30.333333333333332"/>
+            <size key="intrinsicContentSize" width="208.33333333333334" height="30.333333333333332"/>
         </designable>
         <designable name="cvu-Uc-wEl">
-            <size key="intrinsicContentSize" width="100" height="30.333333333333332"/>
+            <size key="intrinsicContentSize" width="148" height="30.333333333333332"/>
         </designable>
         <designable name="eyn-AE-Bgf">
-            <size key="intrinsicContentSize" width="173.66666666666666" height="30.333333333333332"/>
+            <size key="intrinsicContentSize" width="221.66666666666666" height="30.333333333333332"/>
         </designable>
         <designable name="iUQ-Fh-3SH">
-            <size key="intrinsicContentSize" width="199.66666666666666" height="30.333333333333332"/>
+            <size key="intrinsicContentSize" width="247.66666666666666" height="30.333333333333332"/>
         </designable>
         <designable name="pqR-mc-HGn">
-            <size key="intrinsicContentSize" width="57.333333333333336" height="30.333333333333332"/>
+            <size key="intrinsicContentSize" width="105.33333333333333" height="30.333333333333332"/>
         </designable>
     </designables>
     <resources>

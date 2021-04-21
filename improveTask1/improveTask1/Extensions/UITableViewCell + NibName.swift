@@ -15,6 +15,13 @@ extension UITableViewCell {
     }
 }
 
+extension UICollectionViewCell {
+    
+    static func nibName() -> String {
+        String(describing: Self.self)
+    }
+}
+
 extension NSObject {
     var theClassName: String {
         String(describing: type(of: self))

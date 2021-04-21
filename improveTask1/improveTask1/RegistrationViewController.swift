@@ -19,6 +19,9 @@ class RegisrationViewController: UIViewController{
     let keychain = KeychainSwift()
     
     @IBAction func registrationAction(_ sender: Any) {
+        if textFields[1].text != textFields[2].text{
+            textFields[2].shake()
+        }
         guard let login = textFields[0].text,
               let password = textFields[1].text,
               let passwordRepeat = textFields[2].text,
@@ -34,7 +37,7 @@ class RegisrationViewController: UIViewController{
             let mainStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
             let destinationViewController = mainStoryBoard.instantiateViewController(identifier: String(describing: UITabBarController.self))
             navigationController?.pushViewController(destinationViewController, animated: true)
-        } else {}
+        }
     }
     
     override func viewDidLoad() {
@@ -117,3 +120,17 @@ extension RegisrationViewController: UITextFieldDelegate, UIScrollViewDelegate {
         registrationLabel.font = registrationLabel.font.withSize(36)
     }
 }
+
+extension UIView {
+    
+    func shake() {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 10, y: self.center.y))
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x + 10, y: self.center.y))
+        
+        self.layer.add(animation, forKey: "position")
+        
+    }}

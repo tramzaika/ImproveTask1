@@ -148,8 +148,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         guard  let userPhoto = userPhoto else {return}
         tableViewProfile.reloadData()
         guard let photo = imageToBase64(userPhoto) else {return}
-        if let photoAnswer = autorizeSimulator.postUserImage(token: autorizationToken, base64: photo) as? AuthorizationMockSimulator.CommonAnswer{
-        }
+        guard let photoAnswer = autorizeSimulator.postUserImage(token: autorizationToken, base64: photo) as? AuthorizationMockSimulator.CommonAnswer else {return}
         dismiss(animated: true)
     }
 }

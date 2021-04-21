@@ -13,9 +13,5 @@ struct Planet {
     let name: String
     var countOfPeople: String
     var type: String
+    var residentsUrl:[String]
 }
-//UIViewController {
-//    let networkService: PlanetsListNetworkService = NetworkService()
-//    var planets:[PlanetListResultResponseModel]=[]
-//    var isLoaded = 0
-//    var page = 1

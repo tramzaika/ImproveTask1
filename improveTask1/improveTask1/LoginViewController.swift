@@ -20,8 +20,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var loginButton: StyledButton!
     @IBOutlet var registrationButton: StyledButton!
     let keychain = KeychainSwift()
-    
-    
+        
     @IBAction func loginAction(_ sender: Any) {
         guard let login = loginTextField.text,
               let password = passwordTextField.text
@@ -30,10 +29,14 @@ class LoginViewController: UIViewController {
         }
         
         let loginAnswer = AuthorizationMockSimulator().logIn(login: login, password: password)
+        if loginAnswer.result == false{
+            passwordTextField.shake()
+            loginTextField.shake()
+        }
+                
         if loginAnswer.result == true,
            let autorizationToken = loginAnswer.token {
             keychain.set(autorizationToken, forKey: UserAutorizationConstants.keychainTokenKey)
-            
             
             let mainStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
             let destinationViewController = mainStoryBoard.instantiateViewController(identifier: String(describing: UITabBarController.self))
@@ -61,7 +64,6 @@ class LoginViewController: UIViewController {
         
         addTapGestureToHideKeyboard()
     }
-    
     
     func addTapGestureToHideKeyboard() {
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(view.endEditing))

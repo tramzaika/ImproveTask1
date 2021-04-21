@@ -13,7 +13,15 @@ protocol PlanetsListNetworkService{
     func getPlanetList(page: Int,onRequestCompleted:@escaping ((PlanetListResponseModel?, Error?)->()))
 }
 
-class NetworkService: PlanetsListNetworkService{
+protocol CitizenNetworkService{
+    func getCitizen(for urlString: String, onRequestCompleted:@escaping ((CitizenResponseModel?, Error?)->()))
+}
+
+class NetworkService: PlanetsListNetworkService, CitizenNetworkService{
+    func getCitizen(for urlString: String, onRequestCompleted: @escaping ((CitizenResponseModel?, Error?) -> ())) {
+        performRequest(urlString: urlString, onRequestCompleted: onRequestCompleted)
+    }
+    
     func getPlanetList(page: Int,onRequestCompleted:@escaping ((PlanetListResponseModel?, Error?)->())) {
         
         performRequest(urlString: NetworkContstants.URLString.planetList + "?page=\(page)", onRequestCompleted: onRequestCompleted)
