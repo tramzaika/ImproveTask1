@@ -89,7 +89,7 @@ extension PlanetListViewController: UITableViewDataSource {
 
 extension PlanetListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       global.urlArray = listOfPlanets[indexPath.row].residentsUrl
+       citizenDataCache.urlArray = listOfPlanets[indexPath.row].residentsUrl
      
         let mainStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let destinationViewController = mainStoryBoard.instantiateViewController(identifier:String(describing: CitizenDetailViewController().theClassName))

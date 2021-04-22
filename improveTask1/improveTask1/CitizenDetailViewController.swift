@@ -11,7 +11,7 @@ import UIKit
 class CitizenDetailViewController: UIViewController {
     var urlStringlist : [String]?
     var planetTitle = String()
-    let person = CitizenCreateService()
+    let personCreateService = CitizenCreateService()
     
     @IBOutlet var collectionView: UICollectionView!
     
@@ -26,12 +26,10 @@ class CitizenDetailViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        person.createDictionary()
+        personCreateService.initiateModel()
         navigationItem.title = planetTitle
     }
-}
-extension CitizenDetailViewController: UICollectionViewDelegate{
-    private func createCompositionalLayout() -> UICollectionViewLayout{
+    private func createCompositionalLayout() -> UICollectionViewLayout {
         let spacing: CGFloat = 26.0
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -44,6 +42,10 @@ extension CitizenDetailViewController: UICollectionViewDelegate{
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
+}
+
+extension CitizenDetailViewController: UICollectionViewDelegate {
+   
 }
 
 extension CitizenDetailViewController: UICollectionViewDataSource {
@@ -60,14 +62,19 @@ extension CitizenDetailViewController: UICollectionViewDataSource {
         else{
             return UICollectionViewCell()
         }
-        cell?.dataIdentifier = global.urlArray[indexPath.row]
+        if indexPath.row >= 200 {
+            for i in 0...200{
+            citizenDataCache.dictionaryOfCitizen.removeValue(forKey: citizenDataCache.urlArray[i])
+        }
+        }
+        cell?.dataIdentifier = citizenDataCache.urlArray[indexPath.row]
         collectionViewCell.cellImage.layer.cornerRadius = 10
         collectionViewCell.layer.cornerRadius = 10
         collectionViewCell.activityIndicator.startAnimating()
         collectionViewCell.activityIndicator.hidesWhenStopped = true
         
-        person.createOne(index: indexPath.row){  dictionary in
-            let url = global.urlArray[indexPath.row]
+        personCreateService.createOne(index: indexPath.row){  dictionary in
+            let url = citizenDataCache.urlArray[indexPath.row]
             guard let people = dictionary[url] else {return}
             DispatchQueue.main.async {
                 if cell?.dataIdentifier == url{
@@ -77,8 +84,8 @@ extension CitizenDetailViewController: UICollectionViewDataSource {
                 }
             }
         }
-        person.createPhoto(index: indexPath.row){  dictionary in
-            let url = global.urlArray[indexPath.row]
+        personCreateService.createPhoto(index: indexPath.row){  dictionary in
+            let url = citizenDataCache.urlArray[indexPath.row]
             guard let people = dictionary[url] else {return}
             DispatchQueue.main.async {
                 if cell?.dataIdentifier == url{

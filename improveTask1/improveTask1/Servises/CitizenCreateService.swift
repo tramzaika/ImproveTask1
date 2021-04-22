@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-struct global {
+struct citizenDataCache {
     static var urlArray : [String] = []
     static var dictionaryOfCitizen: Dictionary<String, Citizen> = [:]
 }
@@ -33,48 +33,43 @@ class CitizenCreateService: UIViewController {
     let networkService: CitizenNetworkService = NetworkService()
     var dictionaryOfCitizen: Dictionary<String, Citizen> = [:]
     
-    func createDictionary(){
+    func initiateModel() {
         var urls:[String]=[]
         var citizens:[Citizen]=[]
-        if global.urlArray.count>=200{
-            for i in  200...global.urlArray.count{
-                global.urlArray.remove(at: i)
-            }
-        }
-        for url in  global.urlArray{
+        for url in  citizenDataCache.urlArray {
             urls.append(url)
             citizens.append(Citizen(name: "", species: "", gender: ""))
         }
-        let seq = zip(urls, citizens)
-        global.dictionaryOfCitizen = Dictionary(uniqueKeysWithValues:seq)
+        let keysWithValues = zip(urls, citizens)
+        citizenDataCache.dictionaryOfCitizen = Dictionary(uniqueKeysWithValues: keysWithValues)
     }
     
-    func createOne(index: Int , completion: @escaping (Dictionary<String, Citizen>) -> Void){
+    func createOne(index: Int , completion: @escaping (Dictionary<String, Citizen>) -> Void) {
         DispatchQueue.global(qos: .utility).async {
-            self.networkService.getCitizen(for: global.urlArray[index]){(response, error) in
+            self.networkService.getCitizen(for: citizenDataCache.urlArray[index]){(response, error) in
                 guard let response = response else {return}
                 let dto = response
                 let citizen = Citizen(name: dto.name, species: dto.species, gender: dto.gender)
-                global.dictionaryOfCitizen[global.urlArray[index]] = citizen
-                completion(global.dictionaryOfCitizen)
+                citizenDataCache.dictionaryOfCitizen[citizenDataCache.urlArray[index]] = citizen
+                completion(citizenDataCache.dictionaryOfCitizen)
             }
         }
     }
     
-    func createPhoto(index: Int , completion: @escaping (Dictionary<String, Citizen>) -> Void){
+    func createPhoto(index: Int , completion: @escaping (Dictionary<String, Citizen>) -> Void) {
         DispatchQueue.global(qos: .utility).async {
-            self.networkService.getCitizen(for: global.urlArray[index]){(response, error) in
+            self.networkService.getCitizen(for: citizenDataCache.urlArray[index]){(response, error) in
                 guard let response = response else {return}
                 let dto = response
                 var citizen = Citizen(name: dto.name, species: dto.species, gender: dto.gender)
                 guard let url = URL(string: dto.image) else {return}
-                let data = try? Data(contentsOf: url)
-                guard let imageData = UIImage(data: data!) else {return}
+                guard let data = try? Data(contentsOf: url) else {return}
+                guard let imageData = UIImage(data: data) else {return}
                 citizen.image = imageData
                 let size = CGSize(width: 100, height: 100)
                 citizen.previewImage = imageData.scaledDown(into: size, centered: true)
-                global.dictionaryOfCitizen[global.urlArray[index]] = citizen
-                completion(global.dictionaryOfCitizen)
+                citizenDataCache.dictionaryOfCitizen[citizenDataCache.urlArray[index]] = citizen
+                completion(citizenDataCache.dictionaryOfCitizen)
             }
         }
     }
@@ -83,26 +78,26 @@ class CitizenCreateService: UIViewController {
 extension UIImage {
     func scaledDown(into size:CGSize, centered:Bool = false) -> UIImage {
         var (targetWidth, targetHeight) = (self.size.width, self.size.height)
-        var (scaleW, scaleH) = (1 as CGFloat, 1 as CGFloat)
+        var (scaleWidth, scaleHeight) = (1.0 as CGFloat, 1.0 as CGFloat)
         if targetWidth > size.width {
-            scaleW = size.width/targetWidth
+            scaleWidth = size.width/targetWidth
         }
         if targetHeight > size.height {
-            scaleH = size.height/targetHeight
+            scaleHeight = size.height/targetHeight
         }
-        let scale = min(scaleW,scaleH)
+        let scale = min(scaleWidth,scaleHeight)
         targetWidth *= scale; targetHeight *= scale
-        let sz = CGSize(width:targetWidth, height:targetHeight)
+        let size = CGSize(width:targetWidth, height:targetHeight)
         if !centered {
-            return UIGraphicsImageRenderer(size:sz).image { _ in
-                self.draw(in:CGRect(origin:.zero, size:sz))
+            return UIGraphicsImageRenderer(size:size).image { _ in
+                self.draw(in:CGRect(origin:.zero, size:size))
             }
         }
         let x = (size.width - targetWidth)/2
         let y = (size.height - targetHeight)/2
         let origin = CGPoint(x:x,y:y)
         return UIGraphicsImageRenderer(size:size).image { _ in
-            self.draw(in:CGRect(origin:origin, size:sz))
+            self.draw(in:CGRect(origin:origin, size:size))
         }
     }
 }

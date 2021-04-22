@@ -14,8 +14,5 @@ struct NetworkContstants {
     struct URLString {
         static let planetList = "https://rickandmortyapi.com/api/location"
     }
-//    struct urlArray {
-//        static var urlStringlist : [String]?
-//    }
 }
 
