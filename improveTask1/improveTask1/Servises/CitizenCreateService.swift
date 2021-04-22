@@ -44,37 +44,33 @@ class CitizenCreateService: UIViewController {
         citizenDataCache.dictionaryOfCitizen = Dictionary(uniqueKeysWithValues: keysWithValues)
     }
     
-    func createOne(index: Int , completion: @escaping (Dictionary<String, Citizen>) -> Void) {
-        DispatchQueue.global(qos: .utility).async {
-            self.networkService.getCitizen(for: citizenDataCache.urlArray[index]){(response, error) in
-                guard let response = response else {return}
-                let dto = response
-                let citizen = Citizen(name: dto.name, species: dto.species, gender: dto.gender)
-                citizenDataCache.dictionaryOfCitizen[citizenDataCache.urlArray[index]] = citizen
-                completion(citizenDataCache.dictionaryOfCitizen)
-            }
-        }
-    }
-    
-    func createPhoto(index: Int , completion: @escaping (Dictionary<String, Citizen>) -> Void) {
-        DispatchQueue.global(qos: .utility).async {
-            self.networkService.getCitizen(for: citizenDataCache.urlArray[index]){(response, error) in
-                guard let response = response else {return}
+    func createOne(index: Int ,
+                   completion: @escaping (Dictionary<String, Citizen>) -> Void,
+                   imageCompletion: @escaping (Dictionary<String, Citizen>) -> Void) {
+        
+        DispatchQueue.global().async {
+            self.networkService.getCitizen(for: citizenDataCache.urlArray[index]){ [weak self] (response, error) in
+                guard let self = self,
+                      let response = response
+                else {return}
                 let dto = response
                 var citizen = Citizen(name: dto.name, species: dto.species, gender: dto.gender)
-                guard let url = URL(string: dto.image) else {return}
-                guard let data = try? Data(contentsOf: url) else {return}
-                guard let imageData = UIImage(data: data) else {return}
-                citizen.image = imageData
-                let size = CGSize(width: 100, height: 100)
-                citizen.previewImage = imageData.scaledDown(into: size, centered: true)
                 citizenDataCache.dictionaryOfCitizen[citizenDataCache.urlArray[index]] = citizen
                 completion(citizenDataCache.dictionaryOfCitizen)
+                
+                self.networkService.getImage(for: dto.image) { (image, error) in
+                    guard let image = image else { return }
+                    
+                    citizen.image = image
+                    let size = CGSize(width: 100, height: 100)
+                    citizen.previewImage = image.scaledDown(into: size, centered: true)
+                    citizenDataCache.dictionaryOfCitizen[citizenDataCache.urlArray[index]] = citizen
+                    imageCompletion(citizenDataCache.dictionaryOfCitizen)
+                }
             }
         }
     }
 }
-
 extension UIImage {
     func scaledDown(into size:CGSize, centered:Bool = false) -> UIImage {
         var (targetWidth, targetHeight) = (self.size.width, self.size.height)
@@ -101,3 +97,4 @@ extension UIImage {
         }
     }
 }
+

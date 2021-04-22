@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import Alamofire
 
 protocol PlanetsListNetworkService{
@@ -15,11 +16,29 @@ protocol PlanetsListNetworkService{
 
 protocol CitizenNetworkService{
     func getCitizen(for urlString: String, onRequestCompleted:@escaping ((CitizenResponseModel?, Error?)->()))
+    func getImage(for urlString: String, onRequestCompleted:@escaping ((UIImage?, Error?)->()))
 }
 
 class NetworkService: PlanetsListNetworkService, CitizenNetworkService{
     func getCitizen(for urlString: String, onRequestCompleted: @escaping ((CitizenResponseModel?, Error?) -> ())) {
         performRequest(urlString: urlString, onRequestCompleted: onRequestCompleted)
+    }
+    
+    func getImage(for urlString: String, onRequestCompleted:@escaping ((UIImage?, Error?)->())) {
+        AF.request(urlString,
+                   method: .get)
+            .response{ response in
+                switch response.result {
+                case .success(let responseData):
+                    if let data = responseData {
+                        onRequestCompleted(UIImage(data: data, scale:1), nil)
+                    } else {
+                        onRequestCompleted(nil, response.error)
+                    }
+                case .failure(let error):
+                    onRequestCompleted(nil, error)
+                }
+            }
     }
     
     func getPlanetList(page: Int,onRequestCompleted:@escaping ((PlanetListResponseModel?, Error?)->())) {
