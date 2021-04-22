@@ -7,45 +7,79 @@
 //
 
 import UIKit
-
+import KeychainSwift
 
 class LoginViewController: UIViewController {
- 
+    
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var textLabel: UILabel!
     
-    @IBOutlet var loginTF: UITextField!
-    @IBOutlet var passwordTF: UITextField!
- 
-    @IBOutlet var enterBtn: StyledButton!
-    @IBOutlet var registrationBtn: StyledButton!
+    @IBOutlet var loginTextField: UITextField!
+    @IBOutlet var passwordTextField: UITextField!
+    
+    @IBOutlet var loginButton: StyledButton!
+    @IBOutlet var registrationButton: StyledButton!
+    let keychain = KeychainSwift()
+        
+    @IBAction func loginAction(_ sender: Any) {
+        guard let login = loginTextField.text,
+              let password = passwordTextField.text
+        else {
+            return
+        }
+        
+        let loginAnswer = AuthorizationMockSimulator().logIn(login: login, password: password)
+        if loginAnswer.result == false{
+            passwordTextField.shake()
+            loginTextField.shake()
+        }
+                
+        if loginAnswer.result == true,
+           let autorizationToken = loginAnswer.token {
+            keychain.set(autorizationToken, forKey: UserAutorizationConstants.keychainTokenKey)
+            
+            let mainStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let destinationViewController = mainStoryBoard.instantiateViewController(identifier: String(describing: UITabBarController.self))
+            navigationController?.pushViewController(destinationViewController, animated: true)
+        }
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @IBAction func registrationAction(_ sender: Any) {
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let destinationViewController = mainStoryBoard.instantiateViewController(identifier:String(describing: RegisrationViewController().theClassName) )
+        navigationController?.pushViewController(destinationViewController, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loginTF.returnKeyType = .continue
-        passwordTF.returnKeyType = .done
+        loginTextField.returnKeyType = .continue
+        passwordTextField.returnKeyType = .done
         
-        loginTF.delegate = self
-        passwordTF.delegate = self
+        loginTextField.delegate = self
+        passwordTextField.delegate = self
         
         addTapGestureToHideKeyboard()
     }
     
     func addTapGestureToHideKeyboard() {
-            let tapGesture = UITapGestureRecognizer(target: view, action: #selector(view.endEditing))
-            view.addGestureRecognizer(tapGesture)
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(view.endEditing))
+        view.addGestureRecognizer(tapGesture)
     }
 }
 
 extension LoginViewController: UITextFieldDelegate {
     
     func  textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == loginTF {
-            passwordTF.becomeFirstResponder()
+        if textField == loginTextField {
+            passwordTextField.becomeFirstResponder()
         }else {
-            passwordTF.resignFirstResponder()
+            passwordTextField.resignFirstResponder()
         }
-            return true
+        return true
     }
 }
+

@@ -1,0 +1,18 @@
+//
+//  Constants.swift
+//  improveTask1
+//
+//  Created by 1234 on 01.04.2021.
+//  Copyright © 2021 Lisa. All rights reserved.
+//
+
+struct UserAutorizationConstants {
+    static let keychainTokenKey = "KeychainTokenKey"
+}
+
+struct NetworkContstants {
+    struct URLString {
+        static let planetList = "https://rickandmortyapi.com/api/location"
+    }
+}
+

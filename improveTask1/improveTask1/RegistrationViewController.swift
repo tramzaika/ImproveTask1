@@ -8,13 +8,37 @@
 
 import Foundation
 import  UIKit
+import KeychainSwift
 
-class RegisrationViewController: UIViewController {
-        
+class RegisrationViewController: UIViewController{
+    
     @IBOutlet var registrationLabel: UILabel!
     @IBOutlet var textFields: [UITextField]!
     @IBOutlet var doneButton: StyledButton!
     @IBOutlet var scrollViewRegistrationViewController: UIScrollView!
+    let keychain = KeychainSwift()
+    
+    @IBAction func registrationAction(_ sender: Any) {
+        if textFields[1].text != textFields[2].text{
+            textFields[2].shake()
+        }
+        guard let login = textFields[0].text,
+              let password = textFields[1].text,
+              let passwordRepeat = textFields[2].text,
+              password == passwordRepeat
+        else {
+            return
+        }
+        
+        let logInAnswer = AuthorizationMockSimulator().registerUser(login: login, password: password)
+        if logInAnswer.result == true,
+           let autorizationToken = logInAnswer.token {
+            keychain.set(autorizationToken, forKey: UserAutorizationConstants.keychainTokenKey)
+            let mainStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let destinationViewController = mainStoryBoard.instantiateViewController(identifier: String(describing: UITabBarController.self))
+            navigationController?.pushViewController(destinationViewController, animated: true)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,8 +76,8 @@ class RegisrationViewController: UIViewController {
     }
     
     func addTapGestureToHideKeyboard() {
-            let tapGesture = UITapGestureRecognizer(target: view, action: #selector(view.endEditing))
-            view.addGestureRecognizer(tapGesture)
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(view.endEditing))
+        view.addGestureRecognizer(tapGesture)
     }
     
     deinit {
@@ -67,7 +91,7 @@ extension RegisrationViewController: UITextFieldDelegate, UIScrollViewDelegate {
         textFields = textFields.sorted{ $0.frame.origin.y < $1.frame.origin.y }
         
         guard let indexTextField = textFields.firstIndex(of: textField) else {
-        return false
+            return false
         }
         
         if indexTextField+1 < textFields.count {
@@ -80,7 +104,7 @@ extension RegisrationViewController: UITextFieldDelegate, UIScrollViewDelegate {
         return true
     }
     
-        func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
         if translation.y > 0 {
             let scale = CGAffineTransform(scaleX: 1, y: 1)
@@ -94,5 +118,19 @@ extension RegisrationViewController: UITextFieldDelegate, UIScrollViewDelegate {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         registrationLabel.font = registrationLabel.font.withSize(36)
+    }
+}
+
+extension UIView {
+    
+    func shake() {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 10.0, y: self.center.y))
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x + 10.0, y: self.center.y))
+        
+        self.layer.add(animation, forKey: "position")
     }
 }
