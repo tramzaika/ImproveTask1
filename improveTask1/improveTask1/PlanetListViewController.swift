@@ -14,7 +14,7 @@ import PKHUD
 class PlanetListViewController: UIViewController {
     
     let networkService: PlanetsListNetworkService = NetworkService()
-    var planets:[PlanetListResultResponseModel] = []
+    var planets: [PlanetListResultResponseModel] = []
     var infoPages = 0
     var isLoaded = false
     var page = 1
@@ -80,6 +80,7 @@ extension PlanetListViewController: UITableViewDataSource {
         }
         cell.selectionStyle = .none
         cell.accessoryType = .disclosureIndicator
+        
         if isLoaded == true {
             cell.locationLabel.text = listOfPlanets[indexPath.row].name
             cell.typeOfLocationLabel.text = listOfPlanets[indexPath.row].type
@@ -92,7 +93,7 @@ extension PlanetListViewController: UITableViewDataSource {
 
 extension PlanetListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       citizenDataCache.urlArray = listOfPlanets[indexPath.row].residentsUrl
+       CitizenDataCache.urlArray = listOfPlanets[indexPath.row].residentsUrl
      
         let mainStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let destinationViewController = mainStoryBoard.instantiateViewController(identifier:String(describing: CitizenDetailViewController().theClassName))

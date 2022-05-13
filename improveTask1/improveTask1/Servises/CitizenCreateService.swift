@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-struct citizenDataCache {
+struct CitizenDataCache {
     static var urlArray : [String] = []
     static var dictionaryOfCitizen: Dictionary<String, Citizen> = [:]
 }
@@ -34,14 +34,14 @@ class CitizenCreateService: UIViewController {
     var dictionaryOfCitizen: Dictionary<String, Citizen> = [:]
     
     func initiateModel() {
-        var urls:[String]=[]
-        var citizens:[Citizen]=[]
-        for url in  citizenDataCache.urlArray {
+        var urls: [String] = []
+        var citizens: [Citizen] = []
+        for url in  CitizenDataCache.urlArray {
             urls.append(url)
             citizens.append(Citizen(name: "", species: "", gender: ""))
         }
         let keysWithValues = zip(urls, citizens)
-        citizenDataCache.dictionaryOfCitizen = Dictionary(uniqueKeysWithValues: keysWithValues)
+        CitizenDataCache.dictionaryOfCitizen = Dictionary(uniqueKeysWithValues: keysWithValues)
     }
     
     func createOne(index: Int ,
@@ -49,14 +49,14 @@ class CitizenCreateService: UIViewController {
                    imageCompletion: @escaping (Dictionary<String, Citizen>) -> Void) {
         
         DispatchQueue.global().async {
-            self.networkService.getCitizen(for: citizenDataCache.urlArray[index]){ [weak self] (response, error) in
+            self.networkService.getCitizen(for: CitizenDataCache.urlArray[index]) { [weak self] (response, error) in
                 guard let self = self,
                       let response = response
-                else {return}
+                else { return }
                 let dto = response
                 var citizen = Citizen(name: dto.name, species: dto.species, gender: dto.gender)
-                citizenDataCache.dictionaryOfCitizen[citizenDataCache.urlArray[index]] = citizen
-                completion(citizenDataCache.dictionaryOfCitizen)
+                CitizenDataCache.dictionaryOfCitizen[CitizenDataCache.urlArray[index]] = citizen
+                completion(CitizenDataCache.dictionaryOfCitizen)
                 
                 self.networkService.getImage(for: dto.image) { (image, error) in
                     guard let image = image else { return }
@@ -64,8 +64,8 @@ class CitizenCreateService: UIViewController {
                     citizen.image = image
                     let size = CGSize(width: 100, height: 100)
                     citizen.previewImage = image.scaledDown(into: size, centered: true)
-                    citizenDataCache.dictionaryOfCitizen[citizenDataCache.urlArray[index]] = citizen
-                    imageCompletion(citizenDataCache.dictionaryOfCitizen)
+                    CitizenDataCache.dictionaryOfCitizen[CitizenDataCache.urlArray[index]] = citizen
+                    imageCompletion(CitizenDataCache.dictionaryOfCitizen)
                 }
             }
         }

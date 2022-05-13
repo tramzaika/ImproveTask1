@@ -59,26 +59,27 @@ extension CitizenDetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CitizenCollectionViewCell.nibName(), for: indexPath) as? CitizenCollectionViewCell
+        
         guard let collectionViewCell = cell else {
             
             return UICollectionViewCell()
         }
         
         if indexPath.row >= 200 {
-            for i in 0...200{
-                citizenDataCache.dictionaryOfCitizen.removeValue(forKey: citizenDataCache.urlArray[i])
+            for i in 0...200 {
+                CitizenDataCache.dictionaryOfCitizen.removeValue(forKey: CitizenDataCache.urlArray[i])
             }
         }
         
-        cell?.dataIdentifier = citizenDataCache.urlArray[indexPath.row]
+        cell?.dataIdentifier = CitizenDataCache.urlArray[indexPath.row]
         collectionViewCell.cellImage.layer.cornerRadius = 10
         collectionViewCell.layer.cornerRadius = 10
         collectionViewCell.activityIndicator.startAnimating()
         collectionViewCell.activityIndicator.hidesWhenStopped = true
-        let url = citizenDataCache.urlArray[indexPath.row]
+        let url = CitizenDataCache.urlArray[indexPath.row]
         
-        if citizenDataCache.dictionaryOfCitizen[citizenDataCache.urlArray[indexPath.row]]?.name.count == 0 {
-        personCreateService.createOne(index: indexPath.row, completion: {  dictionary in
+        if CitizenDataCache.dictionaryOfCitizen[CitizenDataCache.urlArray[indexPath.row]]?.name.count == 0 {
+        personCreateService.createOne(index: indexPath.row, completion: { dictionary in
             guard let people = dictionary[url] else {
                 return
             }
@@ -90,13 +91,13 @@ extension CitizenDetailViewController: UICollectionViewDataSource {
                     collectionViewCell.speciesLabel.text = people.species
                 }
             }
-        }, imageCompletion: {  dictionary in
+        }, imageCompletion: { dictionary in
             guard let people = dictionary[url] else {
                 return
             }
             
             DispatchQueue.main.async {
-                if cell?.dataIdentifier == url{
+                if cell?.dataIdentifier == url {
                     collectionViewCell.cellImage.image = people.previewImage
                     collectionViewCell.activityView.isHidden = true
                     collectionViewCell.activityIndicator.stopAnimating()
@@ -104,11 +105,11 @@ extension CitizenDetailViewController: UICollectionViewDataSource {
             }
         })
         } else {
-            guard let people = citizenDataCache.dictionaryOfCitizen[citizenDataCache.urlArray[indexPath.row]] else {
+            guard let people = CitizenDataCache.dictionaryOfCitizen[CitizenDataCache.urlArray[indexPath.row]] else {
                 return collectionViewCell
             }
             
-            if cell?.dataIdentifier == url{
+            if cell?.dataIdentifier == url {
             collectionViewCell.nameLabel.text = people.name
             collectionViewCell.genderLabel.text = people.gender
             collectionViewCell.speciesLabel.text = people.species
