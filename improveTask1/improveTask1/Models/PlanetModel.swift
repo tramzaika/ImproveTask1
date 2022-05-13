@@ -13,5 +13,5 @@ struct Planet {
     let name: String
     var countOfPeople: String
     var type: String
-    var residentsUrl:[String]
+    var residentsUrl: [String]
 }

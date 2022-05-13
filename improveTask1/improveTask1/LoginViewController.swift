@@ -43,6 +43,7 @@ class LoginViewController: UIViewController {
             navigationController?.pushViewController(destinationViewController, animated: true)
         }
     }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }

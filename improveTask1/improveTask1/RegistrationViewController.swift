@@ -19,7 +19,7 @@ class RegisrationViewController: UIViewController{
     let keychain = KeychainSwift()
     
     @IBAction func registrationAction(_ sender: Any) {
-        if textFields[1].text != textFields[2].text{
+        if textFields[1].text != textFields[2].text {
             textFields[2].shake()
         }
         guard let login = textFields[0].text,
@@ -52,8 +52,8 @@ class RegisrationViewController: UIViewController{
         textFields[1].returnKeyType = .continue
         textFields[2].returnKeyType = .done
         
-        for i in textFields {
-            i.delegate = self
+        for textField in textFields {
+            textField.delegate = self
         }
         scrollViewRegistrationViewController.delegate = self
     }

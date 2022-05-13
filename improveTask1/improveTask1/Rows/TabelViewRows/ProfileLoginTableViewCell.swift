@@ -9,7 +9,6 @@
 import UIKit
 
 class ProfileLoginTableViewCell: UITableViewCell {
-       
 
     @IBOutlet var colorProfileImage: UIImageView!
     @IBOutlet var titleLabel: UILabel!

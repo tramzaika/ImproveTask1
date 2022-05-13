@@ -9,11 +9,12 @@
 import UIKit
 
 class CitizenDetailViewController: UIViewController {
+    
+    @IBOutlet var collectionView: UICollectionView!
+    
     var urlStringlist : [String]?
     var planetTitle = String()
     let personCreateService = CitizenCreateService()
-    
-    @IBOutlet var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,33 +41,35 @@ class CitizenDetailViewController: UIViewController {
         section.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
         section.interGroupSpacing = spacing
         let layout = UICollectionViewCompositionalLayout(section: section)
+        
         return layout
     }
 }
 
-extension CitizenDetailViewController: UICollectionViewDelegate {
-   
-}
+extension CitizenDetailViewController: UICollectionViewDelegate {}
 
 extension CitizenDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let cellCount = urlStringlist?.count else {
             return 0
         }
+        
         return cellCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CitizenCollectionViewCell.nibName(), for: indexPath) as? CitizenCollectionViewCell
-        guard let collectionViewCell = cell
-        else{
+        guard let collectionViewCell = cell else {
+            
             return UICollectionViewCell()
         }
+        
         if indexPath.row >= 200 {
             for i in 0...200{
                 citizenDataCache.dictionaryOfCitizen.removeValue(forKey: citizenDataCache.urlArray[i])
             }
         }
+        
         cell?.dataIdentifier = citizenDataCache.urlArray[indexPath.row]
         collectionViewCell.cellImage.layer.cornerRadius = 10
         collectionViewCell.layer.cornerRadius = 10
@@ -74,18 +77,24 @@ extension CitizenDetailViewController: UICollectionViewDataSource {
         collectionViewCell.activityIndicator.hidesWhenStopped = true
         let url = citizenDataCache.urlArray[indexPath.row]
         
-        if citizenDataCache.dictionaryOfCitizen[citizenDataCache.urlArray[indexPath.row]]?.name.count == 0{
+        if citizenDataCache.dictionaryOfCitizen[citizenDataCache.urlArray[indexPath.row]]?.name.count == 0 {
         personCreateService.createOne(index: indexPath.row, completion: {  dictionary in
-            guard let people = dictionary[url] else {return}
+            guard let people = dictionary[url] else {
+                return
+            }
+            
             DispatchQueue.main.async {
-                if cell?.dataIdentifier == url{
+                if cell?.dataIdentifier == url {
                     collectionViewCell.nameLabel.text = people.name
                     collectionViewCell.genderLabel.text = people.gender
                     collectionViewCell.speciesLabel.text = people.species
                 }
             }
         }, imageCompletion: {  dictionary in
-            guard let people = dictionary[url] else {return}
+            guard let people = dictionary[url] else {
+                return
+            }
+            
             DispatchQueue.main.async {
                 if cell?.dataIdentifier == url{
                     collectionViewCell.cellImage.image = people.previewImage
@@ -95,7 +104,10 @@ extension CitizenDetailViewController: UICollectionViewDataSource {
             }
         })
         } else {
-            guard let people = citizenDataCache.dictionaryOfCitizen[citizenDataCache.urlArray[indexPath.row]] else {return collectionViewCell}
+            guard let people = citizenDataCache.dictionaryOfCitizen[citizenDataCache.urlArray[indexPath.row]] else {
+                return collectionViewCell
+            }
+            
             if cell?.dataIdentifier == url{
             collectionViewCell.nameLabel.text = people.name
             collectionViewCell.genderLabel.text = people.gender
@@ -105,6 +117,7 @@ extension CitizenDetailViewController: UICollectionViewDataSource {
             collectionViewCell.activityIndicator.stopAnimating()
             }
         }
+        
         return collectionViewCell
     }
 }

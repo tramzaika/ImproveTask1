@@ -24,6 +24,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let ProfileLoginTableViewCellNib = UINib(nibName: ProfileLoginTableViewCell.nibName(), bundle: Bundle.main)
         tableViewProfile.register(ProfileLoginTableViewCellNib, forCellReuseIdentifier: ProfileLoginTableViewCell.nibName())
         
@@ -38,15 +39,16 @@ class ProfileViewController: UIViewController {
         tableViewProfile.delegate = self
         
         if let token = keychain.get(UserAutorizationConstants.keychainTokenKey) {
-            autorizationToken = token} else {return}
+            autorizationToken = token
+        } else {
+            return
+        }
         
         guard let user = AuthorizationMockSimulator().getProfile(token: autorizationToken) else { return }
         
-        if let user = AuthorizationMockSimulator().getProfile(token: autorizationToken){
-            login = user.user?.login ?? "Логин пользователя"
-            if let photo = user.user?.photo{
-                userPhoto = base64ToImage(photo) ?? placeholderUserPhoto
-            }
+        login = user.user?.login ?? "Логин пользователя"
+        if let photo = user.user?.photo {
+            userPhoto = base64ToImage(photo) ?? placeholderUserPhoto
         }
     }
 }
@@ -78,8 +80,7 @@ extension ProfileViewController: UITableViewDelegate {
             actionSheet.addAction(photo)
             actionSheet.addAction(cancel)
             present(actionSheet,animated: true)
-        }
-        else {
+        } else {
             view.endEditing(true)
         }
     }
@@ -131,9 +132,9 @@ extension ProfileViewController: UITableViewDataSource {
     }
 }
 
-extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-    func chooseImagePicker(source: UIImagePickerController.SourceType){
-        if UIImagePickerController.isSourceTypeAvailable(source){
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func chooseImagePicker(source: UIImagePickerController.SourceType) {
+        if UIImagePickerController.isSourceTypeAvailable(source) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.allowsEditing = true
@@ -145,10 +146,10 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         userPhoto = info[.editedImage] as? UIImage
-        guard  let userPhoto = userPhoto else {return}
+        guard  let userPhoto = userPhoto else { return }
         tableViewProfile.reloadData()
-        guard let photo = imageToBase64(userPhoto) else {return}
-        guard let photoAnswer = autorizeSimulator.postUserImage(token: autorizationToken, base64: photo) as? AuthorizationMockSimulator.CommonAnswer else {return}
+        guard let photo = imageToBase64(userPhoto) else { return }
+        guard let photoAnswer = autorizeSimulator.postUserImage(token: autorizationToken, base64: photo) as? AuthorizationMockSimulator.CommonAnswer else { return }
         dismiss(animated: true)
     }
 }

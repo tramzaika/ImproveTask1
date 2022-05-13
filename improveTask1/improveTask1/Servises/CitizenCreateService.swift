@@ -71,8 +71,9 @@ class CitizenCreateService: UIViewController {
         }
     }
 }
+
 extension UIImage {
-    func scaledDown(into size:CGSize, centered:Bool = false) -> UIImage {
+    func scaledDown(into size: CGSize, centered: Bool = false) -> UIImage {
         var (targetWidth, targetHeight) = (self.size.width, self.size.height)
         var (scaleWidth, scaleHeight) = (1.0 as CGFloat, 1.0 as CGFloat)
         if targetWidth > size.width {
@@ -91,9 +92,9 @@ extension UIImage {
         }
         let x = (size.width - targetWidth)/2
         let y = (size.height - targetHeight)/2
-        let origin = CGPoint(x:x,y:y)
+        let origin = CGPoint(x: x,y: y)
         return UIGraphicsImageRenderer(size:size).image { _ in
-            self.draw(in:CGRect(origin:origin, size:size))
+            self.draw(in: CGRect(origin: origin, size: size))
         }
     }
 }
