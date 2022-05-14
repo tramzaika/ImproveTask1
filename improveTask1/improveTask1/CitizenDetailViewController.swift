@@ -30,6 +30,7 @@ class CitizenDetailViewController: UIViewController {
         personCreateService.initiateModel()
         navigationItem.title = planetTitle
     }
+    
     private func createCompositionalLayout() -> UICollectionViewLayout {
         let spacing: CGFloat = 26.0
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))

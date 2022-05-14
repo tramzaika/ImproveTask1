@@ -30,7 +30,7 @@ struct VocabularyOfCitizen {
 
 class CitizenCreateService: UIViewController {
     
-    let networkService: CitizenNetworkService = NetworkService()
+    let networkService = NetworkService()
     var dictionaryOfCitizen: Dictionary<String, Citizen> = [:]
     
     func initiateModel() {

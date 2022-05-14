@@ -46,7 +46,7 @@ class NetworkService: PlanetsListNetworkService, CitizenNetworkService{
         performRequest(urlString: NetworkContstants.URLString.planetList + "?page=\(page)", onRequestCompleted: onRequestCompleted)
     }
     
-    private func performRequest<ResponseModel:Decodable>(urlString: String, method: HTTPMethod = .get,onRequestCompleted: @escaping ((ResponseModel?, Error?)->())) {
+    private func performRequest<ResponseModel:Decodable>(urlString: String, method: HTTPMethod = .get, onRequestCompleted: @escaping ((ResponseModel?, Error?)->())) {
         
         AF.request(urlString,
                    method: .get,
